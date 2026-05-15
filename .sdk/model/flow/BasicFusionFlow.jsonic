@@ -1,0 +1,18 @@
+# BasicFusionFlow
+
+main: kit: flow: BasicFusionFlow:
+{
+  entity: "fusion",
+  kind: "basic",
+  name: "BasicFusionFlow",
+  step: [
+    {
+      input: {
+        ref: "fusion_ref01"
+      }
+
+      op: "create"
+    }
+  ],
+  "key$": "BasicFusionFlow"
+}

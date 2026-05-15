@@ -1,0 +1,31 @@
+# Guide
+
+guide: {
+  metrics: count: entity: 3
+  metrics: count: path: 4
+  metrics: count: method: 4
+
+  entity: fusion: {
+    path: "/fusion": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: materia: {
+    path: "/materia": {
+      op: list: method: *GET
+      op: list: transform: res: *("`body.materia`")|top
+    }
+    path: "/materia/{name}": {
+      rename: param: "name": *"id"
+      op: load: method: *GET
+    }
+  }
+
+  entity: system: {
+    path: "/health": {
+      op: load: method: *GET
+    }
+  }
+
+}

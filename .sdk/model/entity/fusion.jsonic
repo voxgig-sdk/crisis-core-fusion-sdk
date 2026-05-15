@@ -1,0 +1,57 @@
+# Entity: fusion
+
+main: kit: entity: fusion: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "materia1"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "materia1_mastered"
+      req: true
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "materia2"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "materia2_mastered"
+      req: true
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "result"
+      req: false
+      type: "`$OBJECT`"
+    }
+  ]
+
+  name: "fusion"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          method: "POST"
+          orig: "/fusion"
+          parts: [
+            "fusion"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

@@ -1,0 +1,22 @@
+package = "voxgig-sdk-crisis-core-fusion"
+version = "0.0-1"
+source = {
+  url = "git://github.com/voxgig-sdk/crisis-core-fusion-sdk.git"
+}
+description = {
+  summary = "CrisisCoreFusion SDK for Lua",
+  license = "MIT"
+}
+dependencies = {
+  "lua >= 5.3",
+  "dkjson >= 2.5",
+  "dkjson >= 2.5",
+}
+build = {
+  type = "builtin",
+  modules = {
+    ["crisis-core-fusion_sdk"] = "crisis-core-fusion_sdk.lua",
+    ["config"] = "config.lua",
+    ["features"] = "features.lua",
+  }
+}

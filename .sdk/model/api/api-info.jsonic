@@ -1,0 +1,28 @@
+# API Information
+
+
+main: {
+  kit: {
+    info: {
+      contact: {
+        name: "Ray Mathew"
+        url: "https://github.com/RayMathew/crisis-core-materia-fusion-api"
+      }
+      description: "This API simulates the fusion of materia from the game 'Crisis Core: Final Fantasy VII'. It provides endpoints to input materia types and retrieves possible fusion outcomes based on complex rules governing the game's mechanics. The API implements over 1300 rules to determine fusion outputs and supports querying materia information."
+      license: {
+        name: "GPL-3.0"
+        url: "https://www.gnu.org/licenses/gpl-3.0.en.html"
+      }
+      servers: [
+        {
+          description: "Production server"
+          url: "https://crisis-core-materia-fusion-api-546461677134.us-central1.run.app"
+        }
+      ]
+      title: "Crisis Core Fusion API"
+      version: "1.0.0"
+    }
+  }
+}
+
+}

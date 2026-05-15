@@ -1,0 +1,41 @@
+{
+  "existing": {
+    "materia": {
+      "MATERIA00": {
+        "description": "s3c",
+        "id": "MATERIA00",
+        "max_level": "s3e",
+        "name": "s3f",
+        "rarity": "s40",
+        "type": "s41"
+      },
+      "MATERIA01": {
+        "description": "s78",
+        "id": "MATERIA01",
+        "max_level": "s7a",
+        "name": "s7b",
+        "rarity": "s7c",
+        "type": "s7d"
+      },
+      "MATERIA02": {
+        "description": "sb4",
+        "id": "MATERIA02",
+        "max_level": "sb6",
+        "name": "sb7",
+        "rarity": "sb8",
+        "type": "sb9"
+      }
+    }
+  },
+  "new": {
+    "materia": {
+      "materia_ref01": {
+        "description": "sf0",
+        "max_level": "sf2",
+        "name": "sf3",
+        "rarity": "sf4",
+        "type": "sf5"
+      }
+    }
+  }
+}

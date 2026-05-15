@@ -1,0 +1,44 @@
+# BasicMateriaFlow
+
+main: kit: flow: BasicMateriaFlow:
+{
+  entity: "materia",
+  kind: "basic",
+  name: "BasicMateriaFlow",
+  step: [
+    {
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "materia_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "materia_ref01",
+        srcdatavar: "materia_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "materia01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-materia_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicMateriaFlow"
+}

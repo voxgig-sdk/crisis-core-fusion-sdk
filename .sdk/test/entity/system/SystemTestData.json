@@ -1,0 +1,22 @@
+{
+  "existing": {
+    "system": {
+      "SYSTEM00": {
+        "status": "sa"
+      },
+      "SYSTEM01": {
+        "status": "s14"
+      },
+      "SYSTEM02": {
+        "status": "s1e"
+      }
+    }
+  },
+  "new": {
+    "system": {
+      "system_ref01": {
+        "status": "s28"
+      }
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "existing": {
+    "fusion": {
+      "FUSION00": {
+        "materia1": "s32",
+        "materia1_mastered": false,
+        "materia2": "s34",
+        "materia2_mastered": false,
+        "result": {}
+      },
+      "FUSION01": {
+        "materia1": "s64",
+        "materia1_mastered": false,
+        "materia2": "s66",
+        "materia2_mastered": false,
+        "result": {}
+      },
+      "FUSION02": {
+        "materia1": "s96",
+        "materia1_mastered": false,
+        "materia2": "s98",
+        "materia2_mastered": false,
+        "result": {}
+      }
+    }
+  },
+  "new": {
+    "fusion": {
+      "fusion_ref01": {
+        "materia1": "sc8",
+        "materia1_mastered": false,
+        "materia2": "sca",
+        "materia2_mastered": false,
+        "result": {}
+      }
+    }
+  }
+}

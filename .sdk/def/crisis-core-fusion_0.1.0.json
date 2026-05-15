@@ -1,0 +1,423 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Crisis Core Fusion API",
+    "description": "This API simulates the fusion of materia from the game 'Crisis Core: Final Fantasy VII'. It provides endpoints to input materia types and retrieves possible fusion outcomes based on complex rules governing the game's mechanics. The API implements over 1300 rules to determine fusion outputs and supports querying materia information.",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Ray Mathew",
+      "url": "https://github.com/RayMathew/crisis-core-materia-fusion-api"
+    },
+    "license": {
+      "name": "GPL-3.0",
+      "url": "https://www.gnu.org/licenses/gpl-3.0.en.html"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://crisis-core-materia-fusion-api-546461677134.us-central1.run.app",
+      "description": "Production server"
+    }
+  ],
+  "paths": {
+    "/materia": {
+      "get": {
+        "summary": "Get all materia",
+        "description": "Retrieves a list of all available materia in the game. This endpoint uses an in-server cache, so requests to the database happen only once after the server is redeployed.",
+        "operationId": "getAllMateria",
+        "tags": [
+          "Materia"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with list of all materia",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "materia": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Materia"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/materia/{name}": {
+      "get": {
+        "summary": "Get specific materia by name",
+        "description": "Retrieves detailed information about a specific materia by its name.",
+        "operationId": "getMateriaByName",
+        "tags": [
+          "Materia"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the materia to retrieve",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with materia details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Materia"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Materia not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/fusion": {
+      "post": {
+        "summary": "Simulate materia fusion",
+        "description": "Calculates the fusion output of two materia based on complex game rules. The output can change if Materia 1 and Materia 2 are interchanged, or if one or both materia are 'Mastered'. Supports over 280,000 possible permutations across 144 distinct materia.",
+        "operationId": "fusionMateria",
+        "tags": [
+          "Fusion"
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "The two materia to fuse and their mastery status",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FusionRequest"
+              },
+              "examples": {
+                "basicFusion": {
+                  "summary": "Basic fusion example",
+                  "value": {
+                    "materia1": "Fire",
+                    "materia1Mastered": false,
+                    "materia2": "Blizzard",
+                    "materia2Mastered": false
+                  }
+                },
+                "masteredFusion": {
+                  "summary": "Fusion with mastered materia",
+                  "value": {
+                    "materia1": "Fire",
+                    "materia1Mastered": true,
+                    "materia2": "Thunder",
+                    "materia2Mastered": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful fusion calculation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FusionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - invalid input data, missing mandatory keys, or invalid materia names",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Unsupported Media Type - Content-Type must be application/json",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests - Rate limit exceeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "Gateway Timeout - Request exceeded timeout limit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "summary": "Health check endpoint",
+        "description": "Returns the health status of the API service",
+        "operationId": "healthCheck",
+        "tags": [
+          "System"
+        ],
+        "responses": {
+          "200": {
+            "description": "Service is healthy",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "ok"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Materia": {
+        "type": "object",
+        "description": "Represents a materia item from Crisis Core: Final Fantasy VII",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique identifier for the materia",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the materia",
+            "example": "Fire"
+          },
+          "type": {
+            "type": "string",
+            "description": "Type/category of the materia",
+            "example": "Magic",
+            "enum": [
+              "Magic",
+              "Command",
+              "Support",
+              "Independent"
+            ]
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the materia's effect",
+            "example": "Casts fire-based magic attacks"
+          },
+          "rarity": {
+            "type": "string",
+            "description": "Rarity level of the materia",
+            "example": "Common",
+            "enum": [
+              "Common",
+              "Uncommon",
+              "Rare",
+              "Very Rare"
+            ]
+          },
+          "maxLevel": {
+            "type": "integer",
+            "description": "Maximum level the materia can reach",
+            "example": 5
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "type"
+        ]
+      },
+      "FusionRequest": {
+        "type": "object",
+        "description": "Request body for fusing two materia",
+        "properties": {
+          "materia1": {
+            "type": "string",
+            "description": "Name of the first materia to fuse",
+            "example": "Fire"
+          },
+          "materia1Mastered": {
+            "type": "boolean",
+            "description": "Whether the first materia is mastered (reached maximum level)",
+            "example": false
+          },
+          "materia2": {
+            "type": "string",
+            "description": "Name of the second materia to fuse",
+            "example": "Blizzard"
+          },
+          "materia2Mastered": {
+            "type": "boolean",
+            "description": "Whether the second materia is mastered (reached maximum level)",
+            "example": false
+          }
+        },
+        "required": [
+          "materia1",
+          "materia1Mastered",
+          "materia2",
+          "materia2Mastered"
+        ]
+      },
+      "FusionResponse": {
+        "type": "object",
+        "description": "Response containing the result of materia fusion",
+        "properties": {
+          "result": {
+            "type": "object",
+            "properties": {
+              "outputMateria": {
+                "type": "string",
+                "description": "Name of the resulting materia from the fusion",
+                "example": "Tri-Fire"
+              },
+              "outputMateriaDetails": {
+                "$ref": "#/components/schemas/Materia"
+              },
+              "input": {
+                "type": "object",
+                "properties": {
+                  "materia1": {
+                    "type": "string",
+                    "example": "Fire"
+                  },
+                  "materia1Mastered": {
+                    "type": "boolean",
+                    "example": false
+                  },
+                  "materia2": {
+                    "type": "string",
+                    "example": "Blizzard"
+                  },
+                  "materia2Mastered": {
+                    "type": "boolean",
+                    "example": false
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "description": "Error response structure",
+        "properties": {
+          "error": {
+            "type": "object",
+            "properties": {
+              "message": {
+                "type": "string",
+                "description": "Error message describing what went wrong",
+                "example": "Invalid materia name provided"
+              },
+              "code": {
+                "type": "string",
+                "description": "Error code for programmatic handling",
+                "example": "INVALID_INPUT"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Materia",
+      "description": "Endpoints for retrieving materia information"
+    },
+    {
+      "name": "Fusion",
+      "description": "Endpoints for simulating materia fusion"
+    },
+    {
+      "name": "System",
+      "description": "System and health check endpoints"
+    }
+  ],
+  "x-rate-limit": {
+    "description": "API implements rate limiting middleware with configurable calls per second (default: 1 call per second)"
+  },
+  "x-middleware": {
+    "features": [
+      "Panic recovery",
+      "Content-Type checking",
+      "Rate limiting",
+      "API timeout protection (default: 5 seconds)"
+    ]
+  }
+}
