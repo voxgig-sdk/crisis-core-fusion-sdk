@@ -9,10 +9,10 @@ import (
 	"testing"
 	"time"
 
-	sdk "github.com/voxgig-sdk/crisis-core-fusion-sdk"
-	"github.com/voxgig-sdk/crisis-core-fusion-sdk/core"
+	sdk "github.com/voxgig-sdk/crisis-core-fusion-sdk/go"
+	"github.com/voxgig-sdk/crisis-core-fusion-sdk/go/core"
 
-	vs "github.com/voxgig/struct"
+	vs "github.com/voxgig-sdk/crisis-core-fusion-sdk/go/utility/struct"
 )
 
 func TestFusionEntity(t *testing.T) {

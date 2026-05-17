@@ -1,10 +1,10 @@
 package voxgigcrisiscorefusionsdk
 
 import (
-	"github.com/voxgig-sdk/crisis-core-fusion-sdk/core"
-	"github.com/voxgig-sdk/crisis-core-fusion-sdk/entity"
-	"github.com/voxgig-sdk/crisis-core-fusion-sdk/feature"
-	_ "github.com/voxgig-sdk/crisis-core-fusion-sdk/utility"
+	"github.com/voxgig-sdk/crisis-core-fusion-sdk/go/core"
+	"github.com/voxgig-sdk/crisis-core-fusion-sdk/go/entity"
+	"github.com/voxgig-sdk/crisis-core-fusion-sdk/go/feature"
+	_ "github.com/voxgig-sdk/crisis-core-fusion-sdk/go/utility"
 )
 
 // Type aliases preserve external API.

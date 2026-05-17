@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	sdk "github.com/voxgig-sdk/crisis-core-fusion-sdk"
-	"github.com/voxgig-sdk/crisis-core-fusion-sdk/core"
+	sdk "github.com/voxgig-sdk/crisis-core-fusion-sdk/go"
+	"github.com/voxgig-sdk/crisis-core-fusion-sdk/go/core"
 )
 
 func TestMateriaDirect(t *testing.T) {

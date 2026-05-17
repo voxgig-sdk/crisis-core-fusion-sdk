@@ -2,13 +2,16 @@
   "existing": {
     "system": {
       "SYSTEM00": {
-        "status": "sa"
+        "status": "sa",
+        "id": "SYSTEM00"
       },
       "SYSTEM01": {
-        "status": "s14"
+        "status": "s14",
+        "id": "SYSTEM01"
       },
       "SYSTEM02": {
-        "status": "s1e"
+        "status": "s1e",
+        "id": "SYSTEM02"
       }
     }
   },

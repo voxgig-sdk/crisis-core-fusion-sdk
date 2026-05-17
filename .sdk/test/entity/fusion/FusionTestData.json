@@ -6,21 +6,24 @@
         "materia1_mastered": false,
         "materia2": "s34",
         "materia2_mastered": false,
-        "result": {}
+        "result": {},
+        "id": "FUSION00"
       },
       "FUSION01": {
         "materia1": "s64",
         "materia1_mastered": false,
         "materia2": "s66",
         "materia2_mastered": false,
-        "result": {}
+        "result": {},
+        "id": "FUSION01"
       },
       "FUSION02": {
         "materia1": "s96",
         "materia1_mastered": false,
         "materia2": "s98",
         "materia2_mastered": false,
-        "result": {}
+        "result": {},
+        "id": "FUSION02"
       }
     }
   },
