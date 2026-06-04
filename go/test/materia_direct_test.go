@@ -194,14 +194,12 @@ func materiaDirectSetup(mockres any) *materiaDirectSetupResult {
 	env := envOverride(map[string]any{
 		"CRISISCOREFUSION_TEST_MATERIA_ENTID": map[string]any{},
 		"CRISISCOREFUSION_TEST_LIVE":    "FALSE",
-		"CRISISCOREFUSION_APIKEY":       "NONE",
 	})
 
 	live := env["CRISISCOREFUSION_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
-			"apikey": env["CRISISCOREFUSION_APIKEY"],
 		}
 		client := sdk.NewCrisisCoreFusionSDK(mergedOpts)
 

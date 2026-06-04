@@ -80,7 +80,6 @@ function fusion_basic_setup($extra)
         "CRISISCOREFUSION_TEST_FUSION_ENTID" => $idmap,
         "CRISISCOREFUSION_TEST_LIVE" => "FALSE",
         "CRISISCOREFUSION_TEST_EXPLAIN" => "FALSE",
-        "CRISISCOREFUSION_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -92,7 +91,6 @@ function fusion_basic_setup($extra)
     if ($env["CRISISCOREFUSION_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["CRISISCOREFUSION_APIKEY"],
             ],
             $extra ?? [],
         ]);

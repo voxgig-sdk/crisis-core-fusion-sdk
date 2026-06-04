@@ -61,14 +61,12 @@ def system_direct_setup(mockres)
   env = Runner.env_override({
     "CRISISCOREFUSION_TEST_SYSTEM_ENTID" => {},
     "CRISISCOREFUSION_TEST_LIVE" => "FALSE",
-    "CRISISCOREFUSION_APIKEY" => "NONE",
   })
 
   live = env["CRISISCOREFUSION_TEST_LIVE"] == "TRUE"
 
   if live
     merged_opts = {
-      "apikey" => env["CRISISCOREFUSION_APIKEY"],
     }
     client = CrisisCoreFusionSDK.new(merged_opts)
     return {

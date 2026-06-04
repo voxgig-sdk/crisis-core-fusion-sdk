@@ -117,14 +117,12 @@ function materia_direct_setup(mockres)
   local env = runner.env_override({
     ["CRISISCOREFUSION_TEST_MATERIA_ENTID"] = {},
     ["CRISISCOREFUSION_TEST_LIVE"] = "FALSE",
-    ["CRISISCOREFUSION_APIKEY"] = "NONE",
   })
 
   local live = env["CRISISCOREFUSION_TEST_LIVE"] == "TRUE"
 
   if live then
     local merged_opts = {
-      apikey = env["CRISISCOREFUSION_APIKEY"],
     }
     local client = sdk.new(merged_opts)
     return {

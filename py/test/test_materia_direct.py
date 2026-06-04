@@ -109,14 +109,12 @@ def _materia_direct_setup(mockres):
     env = runner.env_override({
         "CRISISCOREFUSION_TEST_MATERIA_ENTID": {},
         "CRISISCOREFUSION_TEST_LIVE": "FALSE",
-        "CRISISCOREFUSION_APIKEY": "NONE",
     })
 
     live = env.get("CRISISCOREFUSION_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {
-            "apikey": env.get("CRISISCOREFUSION_APIKEY"),
         }
         client = CrisisCoreFusionSDK(merged_opts)
         return {

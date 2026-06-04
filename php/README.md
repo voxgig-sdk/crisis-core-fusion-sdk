@@ -20,9 +20,7 @@ loading a specific record.
 <?php
 require_once 'crisiscorefusion_sdk.php';
 
-$client = new CrisisCoreFusionSDK([
-    "apikey" => getenv("CRISIS-CORE-FUSION_APIKEY"),
-]);
+$client = new CrisisCoreFusionSDK([]);
 ```
 
 ### 4. Create, update, and remove
@@ -113,7 +111,6 @@ Create a `.env.local` file at the project root:
 
 ```
 CRISIS-CORE-FUSION_TEST_LIVE=TRUE
-CRISIS-CORE-FUSION_APIKEY=<your-key>
 ```
 
 Then run:
@@ -136,7 +133,6 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |

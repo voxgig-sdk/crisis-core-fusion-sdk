@@ -14,9 +14,6 @@ local function make_config()
     },
     options = {
       base = "https://crisis-core-materia-fusion-api-546461677134.us-central1.run.app",
-      auth = {
-        prefix = "Bearer",
-      },
       headers = {
         ["content-type"] = "application/json",
       },
