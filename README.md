@@ -1,20 +1,8 @@
 # CrisisCoreFusion SDK
 
-Simulate materia fusion from Crisis Core: Final Fantasy VII and look up possible fusion outcomes
+Crisis Core Fusion API client, generated from the OpenAPI spec.
 
 > TypeScript, Python, PHP, Golang, Ruby, Lua SDKs, a CLI, an interactive REPL, and an MCP server for AI agents — all generated from one OpenAPI spec by [@voxgig/sdkgen](https://github.com/voxgig/sdkgen).
-
-## About Crisis Core Fusion API
-
-The Crisis Core Fusion API is a small Go service that models the materia fusion mechanics from the video game *Crisis Core: Final Fantasy VII*. It is maintained as an open-source side project by [RayMathew](https://github.com/RayMathew/crisis-core-materia-fusion-api) and runs on Google Cloud Run.
-
-What you get from the API:
-
-- `GET /materia` — list every materia known to the service.
-- `POST /fusion` — submit two materia (with their mastery status) and receive the resulting fusion outcome computed from the game's rules.
-- `GET /status` — lightweight health check for uptime monitoring.
-
-No authentication, API key, or documented rate limit is required to call the public endpoint.
 
 ## Try it
 
@@ -48,27 +36,28 @@ gem install crisis-core-fusion-sdk
 luarocks install crisis-core-fusion-sdk
 ```
 
-## 30-second quickstart
+## Quickstart
 
 ### TypeScript
 
 ```ts
 import { CrisisCoreFusionSDK } from 'crisis-core-fusion'
 
-const client = new CrisisCoreFusionSDK({})
+const client = new CrisisCoreFusionSDK({
+  apikey: process.env.CRISIS-CORE-FUSION_APIKEY,
+})
 
 ```
 
-See the [TypeScript README](ts/README.md) for the
-full guide, or scroll down for the same example in other languages.
+See the [TypeScript README](ts/README.md) for the full guide.
 
-## What's in the box
+## Surfaces
 
-| Surface | Use it for | Path |
-| --- | --- | --- |
-| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | App integration | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
-| **CLI** | Scripts, CI, ops, one-off API calls | `go-cli/` |
-| **MCP server** | AI agents (Claude, Cursor, Cline) | `go-mcp/` |
+| Surface | Path |
+| --- | --- |
+| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
+| **CLI** | `go-cli/` |
+| **MCP server** | `go-mcp/` |
 
 ## Use it from an AI agent (MCP)
 
@@ -98,9 +87,9 @@ The API exposes 3 entities:
 
 | Entity | Description | API path |
 | --- | --- | --- |
-| **Fusion** | Fusion operations that combine two input materia and return the resulting materia, exposed at `POST /fusion`. | `/fusion` |
-| **Materia** | The catalogue of materia items available as fusion inputs, listed via `GET /materia`. | `/materia` |
-| **System** | Service-level utilities such as the `GET /status` health check. | `/health` |
+| **Fusion** |  | `/fusion` |
+| **Materia** |  | `/materia` |
+| **System** |  | `/health` |
 
 Each entity supports the following operations where available: **load**,
 **list**, **create**, **update**, and **remove**.
@@ -110,9 +99,12 @@ Each entity supports the following operations where available: **load**,
 ### Python
 
 ```python
+import os
 from crisiscorefusion_sdk import CrisisCoreFusionSDK
 
-client = CrisisCoreFusionSDK({})
+client = CrisisCoreFusionSDK({
+    "apikey": os.environ.get("CRISIS-CORE-FUSION_APIKEY"),
+})
 
 ```
 
@@ -122,7 +114,9 @@ client = CrisisCoreFusionSDK({})
 <?php
 require_once 'crisiscorefusion_sdk.php';
 
-$client = new CrisisCoreFusionSDK([]);
+$client = new CrisisCoreFusionSDK([
+    "apikey" => getenv("CRISIS-CORE-FUSION_APIKEY"),
+]);
 
 ```
 
@@ -131,7 +125,9 @@ $client = new CrisisCoreFusionSDK([]);
 ```go
 import sdk "github.com/voxgig-sdk/crisis-core-fusion-sdk/go"
 
-client := sdk.NewCrisisCoreFusionSDK(map[string]any{})
+client := sdk.NewCrisisCoreFusionSDK(map[string]any{
+    "apikey": os.Getenv("CRISIS-CORE-FUSION_APIKEY"),
+})
 
 ```
 
@@ -140,7 +136,9 @@ client := sdk.NewCrisisCoreFusionSDK(map[string]any{})
 ```ruby
 require_relative "CrisisCoreFusion_sdk"
 
-client = CrisisCoreFusionSDK.new({})
+client = CrisisCoreFusionSDK.new({
+  "apikey" => ENV["CRISIS-CORE-FUSION_APIKEY"],
+})
 
 ```
 
@@ -149,7 +147,9 @@ client = CrisisCoreFusionSDK.new({})
 ```lua
 local sdk = require("crisis-core-fusion_sdk")
 
-local client = sdk.new({})
+local client = sdk.new({
+  apikey = os.getenv("CRISIS-CORE-FUSION_APIKEY"),
+})
 
 ```
 
@@ -169,25 +169,21 @@ const result = await client.Fusion().load({ id: 'test01' })
 ### Python
 
 ```python
-client = CrisisCoreFusionSDK.test(None, None)
-result, err = client.Fusion(None).load(
-    {"id": "test01"}, None
-)
+client = CrisisCoreFusionSDK.test()
+result, err = client.Fusion().load({"id": "test01"})
 ```
 
 ### PHP
 
 ```php
-$client = CrisisCoreFusionSDK::test(null, null);
-[$result, $err] = $client->Fusion(null)->load(
-    ["id" => "test01"], null
-);
+$client = CrisisCoreFusionSDK::test();
+[$result, $err] = $client->Fusion()->load(["id" => "test01"]);
 ```
 
 ### Golang
 
 ```go
-client := sdk.TestSDK(nil, nil)
+client := sdk.Test()
 result, err := client.Fusion(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
@@ -196,19 +192,15 @@ result, err := client.Fusion(nil).Load(
 ### Ruby
 
 ```ruby
-client = CrisisCoreFusionSDK.test(nil, nil)
-result, err = client.Fusion(nil).load(
-  { "id" => "test01" }, nil
-)
+client = CrisisCoreFusionSDK.test
+result, err = client.Fusion().load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
-local client = sdk.test(nil, nil)
-local result, err = client:Fusion(nil):load(
-  { id = "test01" }, nil
-)
+local client = sdk.test()
+local result, err = client:Fusion():load({ id = "test01" })
 ```
 
 ## How it works
@@ -312,16 +304,6 @@ local result, err = client:direct({
 - [Golang](go/README.md)
 - [Ruby](rb/README.md)
 - [Lua](lua/README.md)
-
-## Using the Crisis Core Fusion API
-
-- Upstream: [https://github.com/RayMathew/crisis-core-materia-fusion-api](https://github.com/RayMathew/crisis-core-materia-fusion-api)
-- API docs: [https://freepublicapis.com/crisis-core-fusion-api](https://freepublicapis.com/crisis-core-fusion-api)
-
-- Distributed under the GNU General Public License v3.0 (GPL-3.0).
-- Source-available; redistributions and derivative works must remain under the same licence.
-- Attribution to the upstream project is expected.
-- Final Fantasy VII and Crisis Core are trademarks of Square Enix; this is an unofficial fan project and is not endorsed by the rights holders.
 
 ---
 

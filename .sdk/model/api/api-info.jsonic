@@ -21,29 +21,7 @@ main: {
       ]
       title: "Crisis Core Fusion API"
       version: "1.0.0"
-      tagline: "Simulate materia fusion from Crisis Core: Final Fantasy VII and look up possible fusion outcomes"
-      homepage: "https://github.com/RayMathew/crisis-core-materia-fusion-api"
-      docs_url: "https://freepublicapis.com/crisis-core-fusion-api"
-      license_short: "GPL-3.0"
-      license_md: `- Distributed under the GNU General Public License v3.0 (GPL-3.0).
-- Source-available; redistributions and derivative works must remain under the same licence.
-- Attribution to the upstream project is expected.
-- Final Fantasy VII and Crisis Core are trademarks of Square Enix; this is an unofficial fan project and is not endorsed by the rights holders.`
-      about_md: `The Crisis Core Fusion API is a small Go service that models the materia fusion mechanics from the video game *Crisis Core: Final Fantasy VII*. It is maintained as an open-source side project by [RayMathew](https://github.com/RayMathew/crisis-core-materia-fusion-api) and runs on Google Cloud Run.
-
-What you get from the API:
-
-- \`GET /materia\` — list every materia known to the service.
-- \`POST /fusion\` — submit two materia (with their mastery status) and receive the resulting fusion outcome computed from the game's rules.
-- \`GET /status\` — lightweight health check for uptime monitoring.
-
-No authentication, API key, or documented rate limit is required to call the public endpoint.`
-      entity_desc: {
-        fusion: "Fusion operations that combine two input materia and return the resulting materia, exposed at `POST /fusion`."
-        materia: "The catalogue of materia items available as fusion inputs, listed via `GET /materia`."
-        system: "Service-level utilities such as the `GET /status` health check."
-      }
-      auth: false
     }
   }
 }
+

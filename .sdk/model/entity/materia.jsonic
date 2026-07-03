@@ -55,7 +55,7 @@ main: kit: entity: materia: {
           ]
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.materia`"
           }
         }
       ]

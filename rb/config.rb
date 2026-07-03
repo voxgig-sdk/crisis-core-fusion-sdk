@@ -15,6 +15,9 @@ module CrisisCoreFusionConfig
       },
       "options" => {
         "base" => "https://crisis-core-materia-fusion-api-546461677134.us-central1.run.app",
+        "auth" => {
+          "prefix" => "Bearer",
+        },
         "headers" => {
           "content-type" => "application/json",
         },
@@ -28,63 +31,63 @@ module CrisisCoreFusionConfig
         "fusion" => {
           "fields" => [
             {
+              "active" => true,
               "name" => "materia1",
               "req" => true,
               "type" => "`$STRING`",
-              "active" => true,
               "index$" => 0,
             },
             {
+              "active" => true,
               "name" => "materia1_mastered",
               "req" => true,
               "type" => "`$BOOLEAN`",
-              "active" => true,
               "index$" => 1,
             },
             {
+              "active" => true,
               "name" => "materia2",
               "req" => true,
               "type" => "`$STRING`",
-              "active" => true,
               "index$" => 2,
             },
             {
+              "active" => true,
               "name" => "materia2_mastered",
               "req" => true,
               "type" => "`$BOOLEAN`",
-              "active" => true,
               "index$" => 3,
             },
             {
+              "active" => true,
               "name" => "result",
               "req" => false,
               "type" => "`$OBJECT`",
-              "active" => true,
               "index$" => 4,
             },
           ],
           "name" => "fusion",
           "op" => {
             "create" => {
+              "input" => "data",
               "name" => "create",
               "points" => [
                 {
+                  "active" => true,
+                  "args" => {},
                   "method" => "POST",
                   "orig" => "/fusion",
                   "parts" => [
                     "fusion",
                   ],
+                  "select" => {},
                   "transform" => {
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "active" => true,
-                  "args" => {},
-                  "select" => {},
                   "index$" => 0,
                 },
               ],
-              "input" => "data",
               "key$" => "create",
             },
           },
@@ -95,85 +98,87 @@ module CrisisCoreFusionConfig
         "materia" => {
           "fields" => [
             {
+              "active" => true,
               "name" => "description",
               "req" => false,
               "type" => "`$STRING`",
-              "active" => true,
               "index$" => 0,
             },
             {
+              "active" => true,
               "name" => "id",
               "req" => true,
               "type" => "`$INTEGER`",
-              "active" => true,
               "index$" => 1,
             },
             {
+              "active" => true,
               "name" => "max_level",
               "req" => false,
               "type" => "`$INTEGER`",
-              "active" => true,
               "index$" => 2,
             },
             {
+              "active" => true,
               "name" => "name",
               "req" => true,
               "type" => "`$STRING`",
-              "active" => true,
               "index$" => 3,
             },
             {
+              "active" => true,
               "name" => "rarity",
               "req" => false,
               "type" => "`$STRING`",
-              "active" => true,
               "index$" => 4,
             },
             {
+              "active" => true,
               "name" => "type",
               "req" => true,
               "type" => "`$STRING`",
-              "active" => true,
               "index$" => 5,
             },
           ],
           "name" => "materia",
           "op" => {
             "list" => {
+              "input" => "data",
               "name" => "list",
               "points" => [
                 {
+                  "active" => true,
+                  "args" => {},
                   "method" => "GET",
                   "orig" => "/materia",
                   "parts" => [
                     "materia",
                   ],
+                  "select" => {},
                   "transform" => {
                     "req" => "`reqdata`",
-                    "res" => "`body`",
+                    "res" => "`body.materia`",
                   },
-                  "active" => true,
-                  "args" => {},
-                  "select" => {},
                   "index$" => 0,
                 },
               ],
-              "input" => "data",
               "key$" => "list",
             },
             "load" => {
+              "input" => "data",
               "name" => "load",
               "points" => [
                 {
+                  "active" => true,
                   "args" => {
                     "params" => [
                       {
+                        "active" => true,
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "name",
                         "reqd" => true,
                         "type" => "`$STRING`",
-                        "active" => true,
                       },
                     ],
                   },
@@ -197,11 +202,9 @@ module CrisisCoreFusionConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "active" => true,
                   "index$" => 0,
                 },
               ],
-              "input" => "data",
               "key$" => "load",
             },
           },
@@ -212,35 +215,35 @@ module CrisisCoreFusionConfig
         "system" => {
           "fields" => [
             {
+              "active" => true,
               "name" => "status",
               "req" => false,
               "type" => "`$STRING`",
-              "active" => true,
               "index$" => 0,
             },
           ],
           "name" => "system",
           "op" => {
             "load" => {
+              "input" => "data",
               "name" => "load",
               "points" => [
                 {
+                  "active" => true,
+                  "args" => {},
                   "method" => "GET",
                   "orig" => "/health",
                   "parts" => [
                     "health",
                   ],
+                  "select" => {},
                   "transform" => {
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "active" => true,
-                  "args" => {},
-                  "select" => {},
                   "index$" => 0,
                 },
               ],
-              "input" => "data",
               "key$" => "load",
             },
           },

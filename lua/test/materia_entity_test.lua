@@ -102,6 +102,7 @@ function materia_basic_setup(extra)
     ["CRISISCOREFUSION_TEST_MATERIA_ENTID"] = idmap,
     ["CRISISCOREFUSION_TEST_LIVE"] = "FALSE",
     ["CRISISCOREFUSION_TEST_EXPLAIN"] = "FALSE",
+    ["CRISISCOREFUSION_APIKEY"] = "NONE",
   })
 
   local idmap_resolved = helpers.to_map(
@@ -113,6 +114,7 @@ function materia_basic_setup(extra)
   if env["CRISISCOREFUSION_TEST_LIVE"] == "TRUE" then
     local merged_opts = vs.merge({
       {
+        apikey = env["CRISISCOREFUSION_APIKEY"],
       },
       extra or {},
     })

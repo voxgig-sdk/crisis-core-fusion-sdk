@@ -30,12 +30,12 @@ Create a new SDK client instance.
 
 ### Static Methods
 
-#### `sdk.test(testopts, sdkopts)`
+#### `sdk.test(testopts?, sdkopts?)`
 
-Create a test client with mock features active. Both arguments may be `nil`.
+Create a test client with mock features active. Both arguments are optional.
 
 ```lua
-local client = sdk.test(nil, nil)
+local client = sdk.test()
 ```
 
 
@@ -112,12 +112,12 @@ local fusion = client:Fusion(nil)
 Create a new entity with the given data.
 
 ```lua
-local result, err = client:Fusion(nil):create({
+local result, err = client:Fusion():create({
   materia1 = --[[ `$STRING` ]],
   materia1_mastered = --[[ `$BOOLEAN` ]],
   materia2 = --[[ `$STRING` ]],
   materia2_mastered = --[[ `$BOOLEAN` ]],
-}, nil)
+})
 ```
 
 ### Common Methods
@@ -174,7 +174,7 @@ local materia = client:Materia(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:Materia(nil):list(nil, nil)
+local results, err = client:Materia():list()
 ```
 
 #### `load(reqmatch, ctrl) -> any, err`
@@ -182,7 +182,7 @@ local results, err = client:Materia(nil):list(nil, nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Materia(nil):load({ id = "materia_id" }, nil)
+local result, err = client:Materia():load({ id = "materia_id" })
 ```
 
 ### Common Methods
@@ -234,7 +234,7 @@ local system = client:System(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:System(nil):load({ id = "system_id" }, nil)
+local result, err = client:System():load({ id = "system_id" })
 ```
 
 ### Common Methods

@@ -120,6 +120,7 @@ function basicSetup(extra?: any) {
     'CRISIS_CORE_FUSION_TEST_MATERIA_ENTID': idmap,
     'CRISIS_CORE_FUSION_TEST_LIVE': 'FALSE',
     'CRISIS_CORE_FUSION_TEST_EXPLAIN': 'FALSE',
+    'CRISIS_CORE_FUSION_APIKEY': 'NONE',
   })
 
   idmap = env['CRISIS_CORE_FUSION_TEST_MATERIA_ENTID']
@@ -129,6 +130,7 @@ function basicSetup(extra?: any) {
   if (live) {
     client = new CrisisCoreFusionSDK(merge([
       {
+        apikey: env.CRISIS_CORE_FUSION_APIKEY,
       },
       extra
     ]))
