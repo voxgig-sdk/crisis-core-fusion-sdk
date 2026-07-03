@@ -10,7 +10,7 @@ The Python SDK for the CrisisCoreFusion API — an entity-oriented client follow
 
 ## Install
 ```bash
-pip install crisis-core-fusion-sdk
+pip install voxgig-sdk-crisis-core-fusion
 ```
 
 Or install from source:

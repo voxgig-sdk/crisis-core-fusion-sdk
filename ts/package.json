@@ -1,7 +1,23 @@
 {
   "name": "@voxgig-sdk/crisis-core-fusion",
   "version": "0.0.1",
-  "description": "DESCRIPTION",
+  "description": "Unofficial generated TypeScript SDK for the Crisis Core Fusion public API. Not affiliated with or endorsed by the upstream API provider.",
+  "keywords": [
+    "voxgig",
+    "sdk",
+    "generated-sdk",
+    "openapi",
+    "api-client",
+    "crisis-core-fusion"
+  ],
+  "homepage": "https://github.com/voxgig-sdk/crisis-core-fusion-sdk#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/voxgig-sdk/crisis-core-fusion-sdk.git"
+  },
+  "bugs": {
+    "url": "https://github.com/voxgig-sdk/crisis-core-fusion-sdk/issues"
+  },
   "main": "dist/CrisisCoreFusionSDK.js",
   "type": "commonjs",
   "types": "dist/CrisisCoreFusionSDK.d.ts",
@@ -14,7 +30,10 @@
     "clean": "rm -rf node_modules yarn.lock package-lock.json",
     "reset": "npm run clean && npm i && npm run build && npm test"
   },
-  "author": "CrisisCoreFusion",
+  "author": {
+    "name": "Voxgig",
+    "url": "https://voxgig.com"
+  },
   "license": "MIT",
   "dependencies": {},
   "peerDependencies": {},

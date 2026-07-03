@@ -10,7 +10,7 @@ The TypeScript SDK for the CrisisCoreFusion API — a type-safe, entity-oriented
 
 ## Install
 ```bash
-npm install crisis-core-fusion
+npm install @voxgig-sdk/crisis-core-fusion
 ```
 ## Tutorial: your first API call
 

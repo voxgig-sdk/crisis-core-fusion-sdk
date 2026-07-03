@@ -10,13 +10,13 @@ The Ruby SDK for the CrisisCoreFusion API — an entity-oriented client using id
 
 ## Install
 ```bash
-gem install crisis-core-fusion-sdk
+gem install voxgig-sdk-crisis-core-fusion
 ```
 
 Or add to your `Gemfile`:
 
 ```ruby
-gem "crisis-core-fusion-sdk"
+gem "voxgig-sdk-crisis-core-fusion"
 ```
 
 Then run:

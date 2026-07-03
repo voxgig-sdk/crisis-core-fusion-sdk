@@ -10,7 +10,7 @@ The PHP SDK for the CrisisCoreFusion API — an entity-oriented client using PHP
 
 ## Install
 ```bash
-composer require voxgig/crisis-core-fusion-sdk
+composer require voxgig-sdk/crisis-core-fusion
 ```
 
 

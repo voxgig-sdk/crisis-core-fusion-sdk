@@ -8,12 +8,14 @@ source = {
   dir = "crisis-core-fusion-sdk/lua"
 }
 description = {
-  summary = "CrisisCoreFusion SDK for Lua",
-  license = "MIT"
+  summary = "Unofficial generated Lua SDK for the Crisis Core Fusion public API. Not affiliated with or endorsed by the upstream API provider.",
+  homepage = "https://github.com/voxgig-sdk/crisis-core-fusion-sdk",
+  issues_url = "https://github.com/voxgig-sdk/crisis-core-fusion-sdk/issues",
+  license = "MIT",
+  labels = { "voxgig", "sdk", "generated-sdk", "openapi", "api-client", "crisis-core-fusion" }
 }
 dependencies = {
   "lua >= 5.3",
-  "dkjson >= 2.5",
   "dkjson >= 2.5",
 }
 build = {
