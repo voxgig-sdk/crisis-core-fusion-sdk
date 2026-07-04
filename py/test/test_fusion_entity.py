@@ -44,9 +44,7 @@ class TestFusionEntity:
         fusion_ref01_data = helpers.to_map(vs.getprop(
             vs.getpath(setup["data"], "new.fusion"), "fusion_ref01"))
 
-        fusion_ref01_data_result, err = fusion_ref01_ent.create(fusion_ref01_data, None)
-        assert err is None
-        fusion_ref01_data = helpers.to_map(fusion_ref01_data_result)
+        fusion_ref01_data = helpers.to_map(fusion_ref01_ent.create(fusion_ref01_data, None))
         assert fusion_ref01_data is not None
 
 
@@ -87,7 +85,6 @@ def _fusion_basic_setup(extra):
         "CRISISCOREFUSION_TEST_FUSION_ENTID": idmap,
         "CRISISCOREFUSION_TEST_LIVE": "FALSE",
         "CRISISCOREFUSION_TEST_EXPLAIN": "FALSE",
-        "CRISISCOREFUSION_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -98,7 +95,6 @@ def _fusion_basic_setup(extra):
     if env.get("CRISISCOREFUSION_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("CRISISCOREFUSION_APIKEY"),
             },
             extra or {},
         ])

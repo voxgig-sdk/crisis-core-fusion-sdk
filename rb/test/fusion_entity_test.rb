@@ -36,8 +36,7 @@ class FusionEntityTest < Minitest::Test
     fusion_ref01_data = Helpers.to_map(Vs.getprop(
       Vs.getpath(setup[:data], "new.fusion"), "fusion_ref01"))
 
-    fusion_ref01_data_result, err = fusion_ref01_ent.create(fusion_ref01_data, nil)
-    assert_nil err
+    fusion_ref01_data_result = fusion_ref01_ent.create(fusion_ref01_data, nil)
     fusion_ref01_data = Helpers.to_map(fusion_ref01_data_result)
     assert !fusion_ref01_data.nil?
 
@@ -77,7 +76,6 @@ def fusion_basic_setup(extra)
     "CRISISCOREFUSION_TEST_FUSION_ENTID" => idmap,
     "CRISISCOREFUSION_TEST_LIVE" => "FALSE",
     "CRISISCOREFUSION_TEST_EXPLAIN" => "FALSE",
-    "CRISISCOREFUSION_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -89,7 +87,6 @@ def fusion_basic_setup(extra)
   if env["CRISISCOREFUSION_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["CRISISCOREFUSION_APIKEY"],
       },
       extra || {},
     ])

@@ -4,6 +4,7 @@
 main: {
   kit: {
     info: {
+      auth: false
       contact: {
         name: "Ray Mathew"
         url: "https://github.com/RayMathew/crisis-core-materia-fusion-api"

@@ -43,8 +43,7 @@ class FusionEntityTest extends TestCase
         $fusion_ref01_data = Helpers::to_map(Vs::getprop(
             Vs::getpath($setup["data"], "new.fusion"), "fusion_ref01"));
 
-        [$fusion_ref01_data_result, $err] = $fusion_ref01_ent->create($fusion_ref01_data, null);
-        $this->assertNull($err);
+        $fusion_ref01_data_result = $fusion_ref01_ent->create($fusion_ref01_data, null);
         $fusion_ref01_data = Helpers::to_map($fusion_ref01_data_result);
         $this->assertNotNull($fusion_ref01_data);
 
@@ -80,7 +79,6 @@ function fusion_basic_setup($extra)
         "CRISISCOREFUSION_TEST_FUSION_ENTID" => $idmap,
         "CRISISCOREFUSION_TEST_LIVE" => "FALSE",
         "CRISISCOREFUSION_TEST_EXPLAIN" => "FALSE",
-        "CRISISCOREFUSION_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -92,7 +90,6 @@ function fusion_basic_setup($extra)
     if ($env["CRISISCOREFUSION_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["CRISISCOREFUSION_APIKEY"],
             ],
             $extra ?? [],
         ]);

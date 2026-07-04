@@ -4,6 +4,8 @@ import { FusionEntity } from './entity/FusionEntity'
 import { MateriaEntity } from './entity/MateriaEntity'
 import { SystemEntity } from './entity/SystemEntity'
 
+export type * from './CrisisCoreFusionTypes'
+
 
 import { inspect } from 'node:util'
 
@@ -204,18 +206,42 @@ class CrisisCoreFusionSDK {
 
 
 
+  _fusion?: FusionEntity
+
+  // Idiomatic facade: `client.fusion.list()` / `client.fusion.load({ id })`.
+  get fusion(): FusionEntity {
+    return (this._fusion ??= new FusionEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.fusion` instead. */
   Fusion(data?: any) {
     const self = this
     return new FusionEntity(self,data)
   }
 
 
+  _materia?: MateriaEntity
+
+  // Idiomatic facade: `client.materia.list()` / `client.materia.load({ id })`.
+  get materia(): MateriaEntity {
+    return (this._materia ??= new MateriaEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.materia` instead. */
   Materia(data?: any) {
     const self = this
     return new MateriaEntity(self,data)
   }
 
 
+  _system?: SystemEntity
+
+  // Idiomatic facade: `client.system.list()` / `client.system.load({ id })`.
+  get system(): SystemEntity {
+    return (this._system ??= new SystemEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.system` instead. */
   System(data?: any) {
     const self = this
     return new SystemEntity(self,data)

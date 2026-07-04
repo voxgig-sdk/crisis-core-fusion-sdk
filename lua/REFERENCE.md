@@ -19,7 +19,6 @@ Create a new SDK client instance.
 | Name | Type | Description |
 | --- | --- | --- |
 | `options` | `table` | SDK configuration options. |
-| `options.apikey` | `string` | API key for authentication. |
 | `options.base` | `string` | Base URL for API requests. |
 | `options.prefix` | `string` | URL prefix appended after base. |
 | `options.suffix` | `string` | URL suffix appended after path. |
@@ -92,7 +91,7 @@ same parameters as `direct()`.
 ## FusionEntity
 
 ```lua
-local fusion = client:Fusion(nil)
+local fusion = client:fusion(nil)
 ```
 
 ### Fields
@@ -112,7 +111,7 @@ local fusion = client:Fusion(nil)
 Create a new entity with the given data.
 
 ```lua
-local result, err = client:Fusion():create({
+local result, err = client:fusion():create({
   materia1 = --[[ `$STRING` ]],
   materia1_mastered = --[[ `$BOOLEAN` ]],
   materia2 = --[[ `$STRING` ]],
@@ -153,7 +152,7 @@ Return the entity name.
 ## MateriaEntity
 
 ```lua
-local materia = client:Materia(nil)
+local materia = client:materia(nil)
 ```
 
 ### Fields
@@ -174,7 +173,7 @@ local materia = client:Materia(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:Materia():list()
+local results, err = client:materia():list()
 ```
 
 #### `load(reqmatch, ctrl) -> any, err`
@@ -182,7 +181,7 @@ local results, err = client:Materia():list()
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Materia():load({ id = "materia_id" })
+local result, err = client:materia():load({ id = "materia_id" })
 ```
 
 ### Common Methods
@@ -218,7 +217,7 @@ Return the entity name.
 ## SystemEntity
 
 ```lua
-local system = client:System(nil)
+local system = client:system(nil)
 ```
 
 ### Fields
@@ -234,7 +233,7 @@ local system = client:System(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:System():load({ id = "system_id" })
+local result, err = client:system():load({ id = "system_id" })
 ```
 
 ### Common Methods

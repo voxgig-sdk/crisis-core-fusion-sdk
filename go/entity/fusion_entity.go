@@ -85,6 +85,27 @@ func (e *FusionEntity) Match(args ...any) any {
 	return out
 }
 
+// DataTyped is the statically-typed accessor for this entity's data. With no
+// argument it returns the current data as an Fusion; with an argument it
+// sets the data and returns the stored value. It delegates to the untyped Data
+// (identical runtime) and converts at the typed boundary.
+func (e *FusionEntity) DataTyped(data ...Fusion) Fusion {
+	if len(data) > 0 {
+		return typedFrom[Fusion](e.Data(asMap(data[0])))
+	}
+	return typedFrom[Fusion](e.Data())
+}
+
+// MatchTyped mirrors DataTyped for the entity's match filter. The match is a
+// partial of the entity, so it round-trips through Fusion (all fields
+// optional at the wire level).
+func (e *FusionEntity) MatchTyped(match ...Fusion) Fusion {
+	if len(match) > 0 {
+		return typedFrom[Fusion](e.Match(asMap(match[0])))
+	}
+	return typedFrom[Fusion](e.Match())
+}
+
 func (e *FusionEntity) Load(_ map[string]any, _ map[string]any) (any, error) {
 	return core.UnsupportedOp("load", e.name)
 }
@@ -116,6 +137,17 @@ func (e *FusionEntity) Create(reqdata map[string]any, ctrl map[string]any) (any,
 			}
 		}
 	})
+}
+
+// CreateTyped is the statically-typed variant of Create: it takes an
+// FusionCreateData and returns an Fusion. It delegates to the untyped
+// Create (identical runtime) and converts at the typed boundary.
+func (e *FusionEntity) CreateTyped(reqdata FusionCreateData, ctrl map[string]any) (Fusion, error) {
+	res, err := e.Create(asMap(reqdata), ctrl)
+	if err != nil {
+		return Fusion{}, err
+	}
+	return typedFrom[Fusion](res), nil
 }
 
 

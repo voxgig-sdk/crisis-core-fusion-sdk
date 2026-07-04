@@ -14,9 +14,14 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  Materia,
+  MateriaLoadMatch,
+  MateriaListMatch,
+} from '../CrisisCoreFusionTypes'
 
 // TODO: needs Entity superclass
-class MateriaEntity extends CrisisCoreFusionEntityBase {
+class MateriaEntity extends CrisisCoreFusionEntityBase<Materia> {
 
   constructor(client: CrisisCoreFusionSDK, entopts: any) {
     super(client, entopts)
@@ -32,7 +37,7 @@ class MateriaEntity extends CrisisCoreFusionEntityBase {
 
 
 
-  async load(this: any, reqmatch?: any, ctrl?: Control) {
+  async load(this: any, reqmatch?: MateriaLoadMatch, ctrl?: Control): Promise<Materia> {
 
     const utility = this._utility
 
@@ -136,14 +141,16 @@ class MateriaEntity extends CrisisCoreFusionEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Materia> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }
 
 
 
-  async list(this: any, reqmatch?: any, ctrl?: Control) {
+  async list(this: any, reqmatch?: MateriaListMatch, ctrl?: Control): Promise<Materia[]> {
 
     const utility = this._utility
 
@@ -243,7 +250,9 @@ class MateriaEntity extends CrisisCoreFusionEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Materia[]> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

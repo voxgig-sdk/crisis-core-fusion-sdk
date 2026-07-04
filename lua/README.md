@@ -9,12 +9,9 @@ The Lua SDK for the CrisisCoreFusion API — an entity-oriented client using Lua
 
 
 ## Install
-```bash
-luarocks install voxgig-sdk-crisis-core-fusion
-```
-
-If the module is not yet published, add the source directory to
-your `LUA_PATH`:
+This package is not yet published to LuaRocks. Install it from the
+GitHub release tag (`lua/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/crisis-core-fusion-sdk/releases)),
+or add the source directory to your `LUA_PATH`:
 
 ```bash
 export LUA_PATH="path/to/lua/?.lua;path/to/lua/?/init.lua;;"
@@ -31,16 +28,14 @@ loading a specific record.
 ```lua
 local sdk = require("crisis-core-fusion_sdk")
 
-local client = sdk.new({
-  apikey = os.getenv("CRISIS-CORE-FUSION_APIKEY"),
-})
+local client = sdk.new()
 ```
 
 ### 4. Create, update, and remove
 
 ```lua
 -- Create
-local created, _ = client:Fusion():create({ name = "Example" })
+local created, _ = client:fusion():create({ name = "Example" })
 
 ```
 
@@ -87,7 +82,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:CrisisCoreFusion():load({ id = "test01" })
+local result, err = client:fusion():load({ id = "test01" })
 -- result contains mock response data
 ```
 
@@ -120,8 +115,7 @@ local client = sdk.new({
 Create a `.env.local` file at the project root:
 
 ```
-CRISIS-CORE-FUSION_TEST_LIVE=TRUE
-CRISIS-CORE-FUSION_APIKEY=<your-key>
+CRISIS_CORE_FUSION_TEST_LIVE=TRUE
 ```
 
 Then run:
@@ -144,7 +138,6 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |
@@ -252,7 +245,7 @@ API path: `/health`
 
 ### Fusion
 
-Create an instance: `const fusion = client.Fusion()`
+Create an instance: `const fusion = client.fusion`
 
 #### Operations
 
@@ -273,7 +266,7 @@ Create an instance: `const fusion = client.Fusion()`
 #### Example: Create
 
 ```ts
-const fusion = await client.Fusion().create({
+const fusion = await client.fusion.create({
   materia1: /* `$STRING` */,
   materia1_mastered: /* `$BOOLEAN` */,
   materia2: /* `$STRING` */,
@@ -284,7 +277,7 @@ const fusion = await client.Fusion().create({
 
 ### Materia
 
-Create an instance: `const materia = client.Materia()`
+Create an instance: `const materia = client.materia`
 
 #### Operations
 
@@ -307,19 +300,19 @@ Create an instance: `const materia = client.Materia()`
 #### Example: Load
 
 ```ts
-const materia = await client.Materia().load({ id: 'materia_id' })
+const materia = await client.materia.load({ id: 'materia_id' })
 ```
 
 #### Example: List
 
 ```ts
-const materias = await client.Materia().list()
+const materias = await client.materia.list()
 ```
 
 
 ### System
 
-Create an instance: `const system = client.System()`
+Create an instance: `const system = client.system`
 
 #### Operations
 
@@ -336,7 +329,7 @@ Create an instance: `const system = client.System()`
 #### Example: Load
 
 ```ts
-const system = await client.System().load({ id: 'system_id' })
+const system = await client.system.load({ id: 'system_id' })
 ```
 
 
@@ -411,11 +404,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local moon = client:Moon(nil)
-moon:load({ planet_id = "earth", id = "luna" }, nil)
+local fusion = client:fusion()
+fusion:load({ id = "example_id" })
 
--- moon:data_get() now returns the loaded moon data
--- moon:match_get() returns the last match criteria
+-- fusion:data_get() now returns the loaded fusion data
+-- fusion:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

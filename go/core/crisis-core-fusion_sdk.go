@@ -245,16 +245,25 @@ func (sdk *CrisisCoreFusionSDK) Direct(fetchargs map[string]any) (map[string]any
 }
 
 
+// Fusion returns a Fusion entity bound to this client.
+// Idiomatic usage: client.Fusion(nil).List(nil, nil) or
+// client.Fusion(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *CrisisCoreFusionSDK) Fusion(data map[string]any) CrisisCoreFusionEntity {
 	return NewFusionEntityFunc(sdk, data)
 }
 
 
+// Materia returns a Materia entity bound to this client.
+// Idiomatic usage: client.Materia(nil).List(nil, nil) or
+// client.Materia(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *CrisisCoreFusionSDK) Materia(data map[string]any) CrisisCoreFusionEntity {
 	return NewMateriaEntityFunc(sdk, data)
 }
 
 
+// System returns a System entity bound to this client.
+// Idiomatic usage: client.System(nil).List(nil, nil) or
+// client.System(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *CrisisCoreFusionSDK) System(data map[string]any) CrisisCoreFusionEntity {
 	return NewSystemEntityFunc(sdk, data)
 }

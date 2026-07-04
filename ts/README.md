@@ -9,9 +9,12 @@ The TypeScript SDK for the CrisisCoreFusion API — a type-safe, entity-oriented
 
 
 ## Install
-```bash
-npm install @voxgig-sdk/crisis-core-fusion
-```
+This package is not yet published to npm. Install it from the GitHub
+release tag (`ts/vX.Y.Z`):
+
+- Releases: [https://github.com/voxgig-sdk/crisis-core-fusion-sdk/releases](https://github.com/voxgig-sdk/crisis-core-fusion-sdk/releases)
+
+
 ## Tutorial: your first API call
 
 This tutorial walks through creating a client, listing entities, and
@@ -20,18 +23,16 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { CrisisCoreFusionSDK } from 'crisis-core-fusion'
+import { CrisisCoreFusionSDK } from '@voxgig-sdk/crisis-core-fusion'
 
-const client = new CrisisCoreFusionSDK({
-  apikey: process.env.CRISIS-CORE-FUSION_APIKEY,
-})
+const client = new CrisisCoreFusionSDK()
 ```
 
 ### 4. Create, update, and remove
 
 ```ts
 // Create
-const created = await client.Fusion().create({
+const created = await client.fusion.create({
   name: 'Example',
 })
 
@@ -79,7 +80,7 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = CrisisCoreFusionSDK.test()
 
-const result = await client.Planet().load({ id: 'test01' })
+const result = await client.fusion.load({ id: 'test01' })
 // result.ok === true
 // result.data contains mock response data
 ```
@@ -87,7 +88,7 @@ const result = await client.Planet().load({ id: 'test01' })
 You can also use the instance method:
 
 ```ts
-const client = new CrisisCoreFusionSDK({ apikey: '...' })
+const client = new CrisisCoreFusionSDK()
 const testClient = client.tester()
 ```
 
@@ -96,7 +97,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.Planet()
+const entity = client.fusion
 
 // First call sets internal match
 await entity.load({ id: 'example' })
@@ -123,7 +124,6 @@ const logger = {
 }
 
 const client = new CrisisCoreFusionSDK({
-  apikey: '...',
   extend: [logger],
 })
 ```
@@ -133,8 +133,7 @@ const client = new CrisisCoreFusionSDK({
 Create a `.env.local` file at the project root:
 
 ```
-CRISIS-CORE-FUSION_TEST_LIVE=TRUE
-CRISIS-CORE-FUSION_APIKEY=<your-key>
+CRISIS_CORE_FUSION_TEST_LIVE=TRUE
 ```
 
 Then run:
@@ -152,7 +151,6 @@ cd ts && npm test
 
 ```ts
 new CrisisCoreFusionSDK(options?: {
-  apikey?: string
   base?: string
   prefix?: string
   suffix?: string
@@ -163,7 +161,6 @@ new CrisisCoreFusionSDK(options?: {
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |
@@ -297,7 +294,7 @@ API path: `/health`
 
 ### Fusion
 
-Create an instance: `const fusion = client.Fusion()`
+Create an instance: `const fusion = client.fusion`
 
 #### Operations
 
@@ -318,7 +315,7 @@ Create an instance: `const fusion = client.Fusion()`
 #### Example: Create
 
 ```ts
-const fusion = await client.Fusion().create({
+const fusion = await client.fusion.create({
   materia1: /* `$STRING` */,
   materia1_mastered: /* `$BOOLEAN` */,
   materia2: /* `$STRING` */,
@@ -329,7 +326,7 @@ const fusion = await client.Fusion().create({
 
 ### Materia
 
-Create an instance: `const materia = client.Materia()`
+Create an instance: `const materia = client.materia`
 
 #### Operations
 
@@ -352,19 +349,19 @@ Create an instance: `const materia = client.Materia()`
 #### Example: Load
 
 ```ts
-const materia = await client.Materia().load({ id: 'materia_id' })
+const materia = await client.materia.load({ id: 'materia_id' })
 ```
 
 #### Example: List
 
 ```ts
-const materias = await client.Materia().list()
+const materias = await client.materia.list()
 ```
 
 
 ### System
 
-Create an instance: `const system = client.System()`
+Create an instance: `const system = client.system`
 
 #### Operations
 
@@ -381,7 +378,7 @@ Create an instance: `const system = client.System()`
 #### Example: Load
 
 ```ts
-const system = await client.System().load({ id: 'system_id' })
+const system = await client.system.load({ id: 'system_id' })
 ```
 
 
@@ -442,7 +439,7 @@ crisis-core-fusion/
 Import the SDK from the package root:
 
 ```ts
-import { CrisisCoreFusionSDK } from 'crisis-core-fusion'
+import { CrisisCoreFusionSDK } from '@voxgig-sdk/crisis-core-fusion'
 ```
 
 ### Entity state
@@ -452,11 +449,11 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const moon = client.Moon()
-await moon.load({ planet_id: 'earth', id: 'luna' })
+const fusion = client.fusion
+await fusion.load({ id: "example_id" })
 
-// moon.data() now returns the loaded moon data
-// moon.match() returns { planet_id: 'earth', id: 'luna' }
+// fusion.data() now returns the loaded fusion data
+// fusion.match() returns { id: "example_id" }
 ```
 
 Call `make()` to create a fresh instance with the same configuration

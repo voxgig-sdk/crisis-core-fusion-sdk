@@ -135,7 +135,6 @@ func materiaBasicSetup(extra map[string]any) *entityTestSetup {
 		"CRISISCOREFUSION_TEST_MATERIA_ENTID": idmap,
 		"CRISISCOREFUSION_TEST_LIVE":      "FALSE",
 		"CRISISCOREFUSION_TEST_EXPLAIN":   "FALSE",
-		"CRISISCOREFUSION_APIKEY":         "NONE",
 	})
 
 	idmapResolved := core.ToMapAny(env["CRISISCOREFUSION_TEST_MATERIA_ENTID"])
@@ -146,7 +145,6 @@ func materiaBasicSetup(extra map[string]any) *entityTestSetup {
 	if env["CRISISCOREFUSION_TEST_LIVE"] == "TRUE" {
 		mergedOpts := vs.Merge([]any{
 			map[string]any{
-				"apikey": env["CRISISCOREFUSION_APIKEY"],
 			},
 			extra,
 		})

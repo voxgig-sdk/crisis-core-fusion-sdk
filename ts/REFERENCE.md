@@ -18,7 +18,6 @@ Create a new SDK client instance.
 | Name | Type | Description |
 | --- | --- | --- |
 | `options` | `object` | SDK configuration options. |
-| `options.apikey` | `string` | API key for authentication. |
 | `options.base` | `string` | Base URL for API requests. |
 | `options.prefix` | `string` | URL prefix appended after base. |
 | `options.suffix` | `string` | URL suffix appended after path. |
@@ -134,7 +133,7 @@ Alias for `CrisisCoreFusionSDK.test()`.
 ## FusionEntity
 
 ```ts
-const fusion = client.Fusion()
+const fusion = client.fusion
 ```
 
 ### Fields
@@ -154,7 +153,7 @@ const fusion = client.Fusion()
 Create a new entity with the given data.
 
 ```ts
-const result = await client.Fusion().create({
+const result = await client.fusion.create({
   materia1: /* `$STRING` */,
   materia1_mastered: /* `$BOOLEAN` */,
   materia2: /* `$STRING` */,
@@ -193,7 +192,7 @@ Return a copy of the entity options.
 ## MateriaEntity
 
 ```ts
-const materia = client.Materia()
+const materia = client.materia
 ```
 
 ### Fields
@@ -214,7 +213,7 @@ const materia = client.Materia()
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.Materia().list()
+const results = await client.materia.list()
 ```
 
 #### `load(match: object, ctrl?: object)`
@@ -222,7 +221,7 @@ const results = await client.Materia().list()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Materia().load({ id: 'materia_id' })
+const result = await client.materia.load({ id: 'materia_id' })
 ```
 
 ### Common Methods
@@ -256,7 +255,7 @@ Return a copy of the entity options.
 ## SystemEntity
 
 ```ts
-const system = client.System()
+const system = client.system
 ```
 
 ### Fields
@@ -272,7 +271,7 @@ const system = client.System()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.System().load({ id: 'system_id' })
+const result = await client.system.load({ id: 'system_id' })
 ```
 
 ### Common Methods

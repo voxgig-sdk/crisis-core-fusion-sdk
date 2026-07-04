@@ -74,14 +74,12 @@ function directSetup(mockres?: any) {
   const env = envOverride({
     'CRISISCOREFUSION_TEST_SYSTEM_ENTID': {},
     'CRISISCOREFUSION_TEST_LIVE': 'FALSE',
-    'CRISISCOREFUSION_APIKEY': 'NONE',
   })
 
   const live = 'TRUE' === env.CRISISCOREFUSION_TEST_LIVE
 
   if (live) {
     const client = new CrisisCoreFusionSDK({
-      apikey: env.CRISISCOREFUSION_APIKEY,
     })
 
     let idmap: any = env['CRISISCOREFUSION_TEST_SYSTEM_ENTID']

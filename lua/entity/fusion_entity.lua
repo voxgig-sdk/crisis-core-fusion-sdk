@@ -83,6 +83,10 @@ end
 
 
 
+---@param reqdata FusionCreateData
+---@param ctrl? table
+---@return Fusion
+---@return string? err
 function FusionEntity:create(reqdata, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

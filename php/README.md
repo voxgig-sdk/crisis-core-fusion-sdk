@@ -9,9 +9,10 @@ The PHP SDK for the CrisisCoreFusion API — an entity-oriented client using PHP
 
 
 ## Install
-```bash
-composer require voxgig-sdk/crisis-core-fusion
-```
+This package is not yet published to Packagist. Install it from the
+GitHub release tag (`php/vX.Y.Z`):
+
+- Releases: [https://github.com/voxgig-sdk/crisis-core-fusion-sdk/releases](https://github.com/voxgig-sdk/crisis-core-fusion-sdk/releases)
 
 
 ## Tutorial: your first API call
@@ -25,16 +26,14 @@ loading a specific record.
 <?php
 require_once 'crisiscorefusion_sdk.php';
 
-$client = new CrisisCoreFusionSDK([
-    "apikey" => getenv("CRISIS-CORE-FUSION_APIKEY"),
-]);
+$client = new CrisisCoreFusionSDK();
 ```
 
 ### 4. Create, update, and remove
 
 ```php
 // Create
-[$created, $_] = $client->Fusion()->create(["name" => "Example"]);
+$created = $client->fusion()->create(["name" => "Example"]);
 
 ```
 
@@ -46,28 +45,31 @@ $client = new CrisisCoreFusionSDK([
 For endpoints not covered by entity methods:
 
 ```php
-[$result, $err] = $client->direct([
+// direct() is the raw-HTTP escape hatch: it returns a result array
+// (it does not throw). Branch on $result["ok"].
+$result = $client->direct([
     "path" => "/api/resource/{id}",
     "method" => "GET",
     "params" => ["id" => "example"],
 ]);
-if ($err) { throw new \Exception($err); }
 
 if ($result["ok"]) {
     echo $result["status"];  // 200
     print_r($result["data"]);  // response body
+} else {
+    echo "Error: " . $result["err"]->getMessage();
 }
 ```
 
 ### Prepare a request without sending it
 
 ```php
-[$fetchdef, $err] = $client->prepare([
+// prepare() throws on error and returns the fetch definition.
+$fetchdef = $client->prepare([
     "path" => "/api/resource/{id}",
     "method" => "DELETE",
     "params" => ["id" => "example"],
 ]);
-if ($err) { throw new \Exception($err); }
 
 echo $fetchdef["url"];
 echo $fetchdef["method"];
@@ -81,7 +83,7 @@ Create a mock client for unit testing — no server required:
 ```php
 $client = CrisisCoreFusionSDK::test();
 
-[$result, $err] = $client->CrisisCoreFusion()->load(["id" => "test01"]);
+$result = $client->fusion()->load(["id" => "test01"]);
 // $result contains mock response data
 ```
 
@@ -115,8 +117,7 @@ $client = new CrisisCoreFusionSDK([
 Create a `.env.local` file at the project root:
 
 ```
-CRISIS-CORE-FUSION_TEST_LIVE=TRUE
-CRISIS-CORE-FUSION_APIKEY=<your-key>
+CRISIS_CORE_FUSION_TEST_LIVE=TRUE
 ```
 
 Then run:
@@ -139,7 +140,6 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |
@@ -187,8 +187,12 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return `[$result, $err]`. The first value is an
-`array` with these keys:
+Entity operations return the bare result data (an `array` for single-entity
+ops, a `list` for `list`) and throw on error. Wrap calls in
+`try`/`catch` to handle failures.
+
+The `direct()` escape hatch never throws — it returns a result `array`
+you branch on via `$result["ok"]`:
 
 | Key | Type | Description |
 | --- | --- | --- |
@@ -247,7 +251,7 @@ API path: `/health`
 
 ### Fusion
 
-Create an instance: `const fusion = client.Fusion()`
+Create an instance: `const fusion = client.fusion`
 
 #### Operations
 
@@ -268,7 +272,7 @@ Create an instance: `const fusion = client.Fusion()`
 #### Example: Create
 
 ```ts
-const fusion = await client.Fusion().create({
+const fusion = await client.fusion.create({
   materia1: /* `$STRING` */,
   materia1_mastered: /* `$BOOLEAN` */,
   materia2: /* `$STRING` */,
@@ -279,7 +283,7 @@ const fusion = await client.Fusion().create({
 
 ### Materia
 
-Create an instance: `const materia = client.Materia()`
+Create an instance: `const materia = client.materia`
 
 #### Operations
 
@@ -302,19 +306,19 @@ Create an instance: `const materia = client.Materia()`
 #### Example: Load
 
 ```ts
-const materia = await client.Materia().load({ id: 'materia_id' })
+const materia = await client.materia.load({ id: 'materia_id' })
 ```
 
 #### Example: List
 
 ```ts
-const materias = await client.Materia().list()
+const materias = await client.materia.list()
 ```
 
 
 ### System
 
-Create an instance: `const system = client.System()`
+Create an instance: `const system = client.system`
 
 #### Operations
 
@@ -331,7 +335,7 @@ Create an instance: `const system = client.System()`
 #### Example: Load
 
 ```ts
-const system = await client.System().load({ id: 'system_id' })
+const system = await client.system.load({ id: 'system_id' })
 ```
 
 
@@ -406,11 +410,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$moon = $client->Moon();
-[$result, $err] = $moon->load(["planet_id" => "earth", "id" => "luna"]);
+$fusion = $client->fusion();
+$fusion->load(["id" => "example_id"]);
 
-// $moon->dataGet() now returns the loaded moon data
-// $moon->matchGet() returns the last match criteria
+// $fusion->dataGet() now returns the loaded fusion data
+// $fusion->matchGet() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

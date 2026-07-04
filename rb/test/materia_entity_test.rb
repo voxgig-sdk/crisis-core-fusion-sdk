@@ -43,16 +43,14 @@ class MateriaEntityTest < Minitest::Test
     materia_ref01_ent = client.Materia(nil)
     materia_ref01_match = {}
 
-    materia_ref01_list_result, err = materia_ref01_ent.list(materia_ref01_match, nil)
-    assert_nil err
+    materia_ref01_list_result = materia_ref01_ent.list(materia_ref01_match, nil)
     assert materia_ref01_list_result.is_a?(Array)
 
     # LOAD
     materia_ref01_match_dt0 = {
       "id" => materia_ref01_data["id"],
     }
-    materia_ref01_data_dt0_loaded, err = materia_ref01_ent.load(materia_ref01_match_dt0, nil)
-    assert_nil err
+    materia_ref01_data_dt0_loaded = materia_ref01_ent.load(materia_ref01_match_dt0, nil)
     materia_ref01_data_dt0_load_result = Helpers.to_map(materia_ref01_data_dt0_loaded)
     assert !materia_ref01_data_dt0_load_result.nil?
     assert_equal materia_ref01_data_dt0_load_result["id"], materia_ref01_data["id"]
@@ -93,7 +91,6 @@ def materia_basic_setup(extra)
     "CRISISCOREFUSION_TEST_MATERIA_ENTID" => idmap,
     "CRISISCOREFUSION_TEST_LIVE" => "FALSE",
     "CRISISCOREFUSION_TEST_EXPLAIN" => "FALSE",
-    "CRISISCOREFUSION_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -105,7 +102,6 @@ def materia_basic_setup(extra)
   if env["CRISISCOREFUSION_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["CRISISCOREFUSION_APIKEY"],
       },
       extra || {},
     ])

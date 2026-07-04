@@ -45,6 +45,7 @@ class MateriaEntity
     end
   end
 
+  # @return [Materia, Hash] the current Materia data
   def data_get
     @_utility.feature_hook.call(@_entctx, "GetData")
     VoxgigStruct.clone(@_data)
@@ -57,12 +58,18 @@ class MateriaEntity
     end
   end
 
+  # @return [Hash] the current match filter (any subset of Materia fields)
   def match_get
     @_utility.feature_hook.call(@_entctx, "GetMatch")
     VoxgigStruct.clone(@_match)
   end
 
   
+  # Load a single Materia.
+  #
+  # @param reqmatch [MateriaLoadMatch, Hash, nil] match criteria (id/query fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Materia, Hash] the loaded Materia; raises CrisisCoreFusionError on failure
   def load(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({
@@ -86,6 +93,11 @@ class MateriaEntity
 
 
   
+  # List Materia items matching the given filter.
+  #
+  # @param reqmatch [MateriaListMatch, Hash, nil] match filter (any subset of Materia fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Array<Materia>, Array] the matching Materia items; raises CrisisCoreFusionError on failure
   def list(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({

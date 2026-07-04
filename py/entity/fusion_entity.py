@@ -1,7 +1,13 @@
 # CrisisCoreFusion SDK Fusion entity
 
+from __future__ import annotations
+
 from utility.voxgig_struct import voxgig_struct as vs
 from core import helpers
+from crisiscorefusion_types import (
+    Fusion,
+    FusionCreateData,
+)
 
 
 class FusionEntity:
@@ -44,7 +50,7 @@ class FusionEntity:
             self._data = helpers.to_map(vs.clone(args)) or {}
             self._utility.feature_hook(self._entctx, "SetData")
 
-    def data_get(self):
+    def data_get(self) -> Fusion:
         self._utility.feature_hook(self._entctx, "GetData")
         return vs.clone(self._data)
 
@@ -53,7 +59,7 @@ class FusionEntity:
             self._match = helpers.to_map(vs.clone(args)) or {}
             self._utility.feature_hook(self._entctx, "SetMatch")
 
-    def match_get(self):
+    def match_get(self) -> Fusion:
         self._utility.feature_hook(self._entctx, "GetMatch")
         return vs.clone(self._match)
 
@@ -62,7 +68,7 @@ class FusionEntity:
     
 
     
-    def create(self, reqdata, ctrl=None):
+    def create(self, reqdata: FusionCreateData, ctrl=None) -> Fusion:
         utility = self._utility
         ctx = utility.make_context({
             "opname": "create",

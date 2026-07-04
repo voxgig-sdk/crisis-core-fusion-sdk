@@ -1,7 +1,14 @@
 # CrisisCoreFusion SDK Materia entity
 
+from __future__ import annotations
+
 from utility.voxgig_struct import voxgig_struct as vs
 from core import helpers
+from crisiscorefusion_types import (
+    Materia,
+    MateriaLoadMatch,
+    MateriaListMatch,
+)
 
 
 class MateriaEntity:
@@ -44,7 +51,7 @@ class MateriaEntity:
             self._data = helpers.to_map(vs.clone(args)) or {}
             self._utility.feature_hook(self._entctx, "SetData")
 
-    def data_get(self):
+    def data_get(self) -> Materia:
         self._utility.feature_hook(self._entctx, "GetData")
         return vs.clone(self._data)
 
@@ -53,12 +60,12 @@ class MateriaEntity:
             self._match = helpers.to_map(vs.clone(args)) or {}
             self._utility.feature_hook(self._entctx, "SetMatch")
 
-    def match_get(self):
+    def match_get(self) -> Materia:
         self._utility.feature_hook(self._entctx, "GetMatch")
         return vs.clone(self._match)
 
     
-    def load(self, reqmatch, ctrl=None):
+    def load(self, reqmatch: MateriaLoadMatch, ctrl=None) -> Materia:
         utility = self._utility
         ctx = utility.make_context({
             "opname": "load",
@@ -80,7 +87,7 @@ class MateriaEntity:
 
 
     
-    def list(self, reqmatch, ctrl=None):
+    def list(self, reqmatch: MateriaListMatch, ctrl=None) -> list[Materia]:
         utility = self._utility
         ctx = utility.make_context({
             "opname": "list",

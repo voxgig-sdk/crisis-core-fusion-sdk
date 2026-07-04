@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch MateriaLoadMatch
+---@param ctrl? table
+---@return Materia
+---@return string? err
 function MateriaEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({
@@ -104,6 +108,10 @@ end
 
 
 
+---@param reqmatch MateriaListMatch
+---@param ctrl? table
+---@return Materia[]
+---@return string? err
 function MateriaEntity:list(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

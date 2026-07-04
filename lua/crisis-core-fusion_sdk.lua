@@ -244,18 +244,57 @@ end
 
 
 
+-- Idiomatic facade: client:fusion():list() / client:fusion():load({ id = ... })
+function CrisisCoreFusionSDK:fusion(data)
+  local EntityMod = require("entity.fusion_entity")
+  if data == nil then
+    if self._fusion == nil then
+      self._fusion = EntityMod.new(self, nil)
+    end
+    return self._fusion
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:fusion() instead.
 function CrisisCoreFusionSDK:Fusion(data)
   local EntityMod = require("entity.fusion_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:materia():list() / client:materia():load({ id = ... })
+function CrisisCoreFusionSDK:materia(data)
+  local EntityMod = require("entity.materia_entity")
+  if data == nil then
+    if self._materia == nil then
+      self._materia = EntityMod.new(self, nil)
+    end
+    return self._materia
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:materia() instead.
 function CrisisCoreFusionSDK:Materia(data)
   local EntityMod = require("entity.materia_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:system():list() / client:system():load({ id = ... })
+function CrisisCoreFusionSDK:system(data)
+  local EntityMod = require("entity.system_entity")
+  if data == nil then
+    if self._system == nil then
+      self._system = EntityMod.new(self, nil)
+    end
+    return self._system
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:system() instead.
 function CrisisCoreFusionSDK:System(data)
   local EntityMod = require("entity.system_entity")
   return EntityMod.new(self, data)

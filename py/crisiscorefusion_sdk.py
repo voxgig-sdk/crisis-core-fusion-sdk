@@ -144,16 +144,23 @@ class CrisisCoreFusionSDK:
 
         _, err = utility.prepare_auth(ctx)
         if err is not None:
-            return None, err
+            raise err
 
-        return utility.make_fetch_def(ctx)
+        fetchdef, err = utility.make_fetch_def(ctx)
+        if err is not None:
+            raise err
+
+        return fetchdef
 
     def direct(self, fetchargs=None):
         utility = self._utility
 
-        fetchdef, err = self.prepare(fetchargs)
-        if err is not None:
-            return {"ok": False, "err": err}, None
+        try:
+            fetchdef = self.prepare(fetchargs)
+        except Exception as err:
+            # direct() is the raw-HTTP escape hatch: it never raises, it
+            # returns a result object callers branch on via result["ok"].
+            return {"ok": False, "err": err}
 
         if fetchargs is None:
             fetchargs = {}
@@ -170,13 +177,13 @@ class CrisisCoreFusionSDK:
         fetched, fetch_err = utility.fetcher(ctx, url, fetchdef)
 
         if fetch_err is not None:
-            return {"ok": False, "err": fetch_err}, None
+            return {"ok": False, "err": fetch_err}
 
         if fetched is None:
             return {
                 "ok": False,
                 "err": ctx.make_error("direct_no_response", "response: undefined"),
-            }, None
+            }
 
         if isinstance(fetched, dict):
             status = helpers.to_int(vs.getprop(fetched, "status"))
@@ -205,25 +212,58 @@ class CrisisCoreFusionSDK:
                 "status": status,
                 "headers": headers,
                 "data": json_data,
-            }, None
+            }
 
         return {
             "ok": False,
             "err": ctx.make_error("direct_invalid", "invalid response type"),
-        }, None
+        }
 
+
+    @property
+    def fusion(self):
+        """Idiomatic facade: client.fusion.list() / client.fusion.load({"id": ...})."""
+        from entity.fusion_entity import FusionEntity
+        cached = getattr(self, "_fusion", None)
+        if cached is None:
+            cached = FusionEntity(self, None)
+            self._fusion = cached
+        return cached
 
     def Fusion(self, data=None):
+        # Deprecated: use client.fusion instead.
         from entity.fusion_entity import FusionEntity
         return FusionEntity(self, data)
 
 
+    @property
+    def materia(self):
+        """Idiomatic facade: client.materia.list() / client.materia.load({"id": ...})."""
+        from entity.materia_entity import MateriaEntity
+        cached = getattr(self, "_materia", None)
+        if cached is None:
+            cached = MateriaEntity(self, None)
+            self._materia = cached
+        return cached
+
     def Materia(self, data=None):
+        # Deprecated: use client.materia instead.
         from entity.materia_entity import MateriaEntity
         return MateriaEntity(self, data)
 
 
+    @property
+    def system(self):
+        """Idiomatic facade: client.system.list() / client.system.load({"id": ...})."""
+        from entity.system_entity import SystemEntity
+        cached = getattr(self, "_system", None)
+        if cached is None:
+            cached = SystemEntity(self, None)
+            self._system = cached
+        return cached
+
     def System(self, data=None):
+        # Deprecated: use client.system instead.
         from entity.system_entity import SystemEntity
         return SystemEntity(self, data)
 
