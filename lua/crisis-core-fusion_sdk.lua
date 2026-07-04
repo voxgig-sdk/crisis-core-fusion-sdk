@@ -244,8 +244,9 @@ end
 
 
 
--- Idiomatic facade: client:fusion():list() / client:fusion():load({ id = ... })
-function CrisisCoreFusionSDK:fusion(data)
+-- Idiomatic facade: client:Fusion():list() / client:Fusion():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function CrisisCoreFusionSDK:Fusion(data)
   local EntityMod = require("entity.fusion_entity")
   if data == nil then
     if self._fusion == nil then
@@ -256,15 +257,10 @@ function CrisisCoreFusionSDK:fusion(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:fusion() instead.
-function CrisisCoreFusionSDK:Fusion(data)
-  local EntityMod = require("entity.fusion_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:materia():list() / client:materia():load({ id = ... })
-function CrisisCoreFusionSDK:materia(data)
+-- Idiomatic facade: client:Materia():list() / client:Materia():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function CrisisCoreFusionSDK:Materia(data)
   local EntityMod = require("entity.materia_entity")
   if data == nil then
     if self._materia == nil then
@@ -275,15 +271,10 @@ function CrisisCoreFusionSDK:materia(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:materia() instead.
-function CrisisCoreFusionSDK:Materia(data)
-  local EntityMod = require("entity.materia_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:system():list() / client:system():load({ id = ... })
-function CrisisCoreFusionSDK:system(data)
+-- Idiomatic facade: client:System():list() / client:System():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function CrisisCoreFusionSDK:System(data)
   local EntityMod = require("entity.system_entity")
   if data == nil then
     if self._system == nil then
@@ -291,12 +282,6 @@ function CrisisCoreFusionSDK:system(data)
     end
     return self._system
   end
-  return EntityMod.new(self, data)
-end
-
--- Deprecated: use client:system() instead.
-function CrisisCoreFusionSDK:System(data)
-  local EntityMod = require("entity.system_entity")
   return EntityMod.new(self, data)
 end
 

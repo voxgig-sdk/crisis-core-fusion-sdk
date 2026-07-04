@@ -130,22 +130,27 @@ in-memory mock, so unit tests run offline.
 
 ```ts
 const client = CrisisCoreFusionSDK.test()
-const result = await client.fusion.load({ id: 'test01' })
-// result.ok === true, result.data contains mock data
+const fusion = await client.Fusion().load({ id: 'test01' })
+// fusion is a bare Fusion populated with mock data
+console.log(fusion)
 ```
 
 ### Python
 
 ```python
 client = CrisisCoreFusionSDK.test()
-result = client.fusion.load({"id": "test01"})
+fusion = client.Fusion().load({"id": "test01"})
+print(fusion)
 ```
 
 ### PHP
 
 ```php
-$client = CrisisCoreFusionSDK::test();
-$result = $client->fusion()->load(["id" => "test01"]);
+// Seed fixture data so offline calls resolve without a live server.
+$client = CrisisCoreFusionSDK::test([
+    "entity" => ["fusion" => ["test01" => ["id" => "test01"]]],
+]);
+$fusion = $client->Fusion()->load(["id" => "test01"]);
 ```
 
 ### Golang
@@ -160,15 +165,18 @@ result, err := client.Fusion(nil).Load(
 ### Ruby
 
 ```ruby
-client = CrisisCoreFusionSDK.test
-result = client.fusion.load({ "id" => "test01" })
+# Seed fixture data so offline calls resolve without a live server.
+client = CrisisCoreFusionSDK.test({
+  "entity" => { "fusion" => { "test01" => { "id" => "test01" } } },
+})
+fusion = client.Fusion.load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:fusion():load({ id = "test01" })
+local result, err = client:Fusion():load({ id = "test01" })
 ```
 
 ## How it works
@@ -216,6 +224,9 @@ const result = await client.direct({
   method: 'GET',
   params: { id: 'example' },
 })
+if (result instanceof Error) {
+  throw result
+}
 console.log(result.data)
 ```
 

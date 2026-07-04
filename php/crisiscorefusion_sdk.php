@@ -233,10 +233,10 @@ class CrisisCoreFusionSDK
 
     private $_fusion = null;
 
-    // Idiomatic facade: $client->fusion()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Fusion() (PHP method
-    // names are case-insensitive).
-    public function fusion($data = null)
+    // Canonical facade: $client->Fusion()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->fusion()
+    // resolves here too.
+    public function Fusion($data = null)
     {
         require_once __DIR__ . '/entity/fusion_entity.php';
         if ($data === null) {
@@ -251,10 +251,10 @@ class CrisisCoreFusionSDK
 
     private $_materia = null;
 
-    // Idiomatic facade: $client->materia()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Materia() (PHP method
-    // names are case-insensitive).
-    public function materia($data = null)
+    // Canonical facade: $client->Materia()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->materia()
+    // resolves here too.
+    public function Materia($data = null)
     {
         require_once __DIR__ . '/entity/materia_entity.php';
         if ($data === null) {
@@ -269,10 +269,10 @@ class CrisisCoreFusionSDK
 
     private $_system = null;
 
-    // Idiomatic facade: $client->system()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias System() (PHP method
-    // names are case-insensitive).
-    public function system($data = null)
+    // Canonical facade: $client->System()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->system()
+    // resolves here too.
+    public function System($data = null)
     {
         require_once __DIR__ . '/entity/system_entity.php';
         if ($data === null) {

@@ -91,7 +91,7 @@ same parameters as `direct()`.
 ## FusionEntity
 
 ```lua
-local fusion = client:fusion(nil)
+local fusion = client:Fusion(nil)
 ```
 
 ### Fields
@@ -111,7 +111,7 @@ local fusion = client:fusion(nil)
 Create a new entity with the given data.
 
 ```lua
-local result, err = client:fusion():create({
+local result, err = client:Fusion():create({
   materia1 = --[[ `$STRING` ]],
   materia1_mastered = --[[ `$BOOLEAN` ]],
   materia2 = --[[ `$STRING` ]],
@@ -152,7 +152,7 @@ Return the entity name.
 ## MateriaEntity
 
 ```lua
-local materia = client:materia(nil)
+local materia = client:Materia(nil)
 ```
 
 ### Fields
@@ -173,7 +173,7 @@ local materia = client:materia(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:materia():list()
+local results, err = client:Materia():list()
 ```
 
 #### `load(reqmatch, ctrl) -> any, err`
@@ -181,7 +181,7 @@ local results, err = client:materia():list()
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:materia():load({ id = "materia_id" })
+local result, err = client:Materia():load({ id = "materia_id" })
 ```
 
 ### Common Methods
@@ -217,7 +217,7 @@ Return the entity name.
 ## SystemEntity
 
 ```lua
-local system = client:system(nil)
+local system = client:System(nil)
 ```
 
 ### Fields
@@ -233,7 +233,7 @@ local system = client:system(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:system():load({ id = "system_id" })
+local result, err = client:System():load({ id = "system_id" })
 ```
 
 ### Common Methods

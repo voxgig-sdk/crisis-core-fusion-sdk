@@ -93,7 +93,7 @@ Prepare a fetch definition without sending the request. Returns the
 ## FusionEntity
 
 ```php
-$fusion = $client->fusion();
+$fusion = $client->Fusion();
 ```
 
 ### Fields
@@ -113,7 +113,7 @@ $fusion = $client->fusion();
 Create a new entity with the given data. Throws on error.
 
 ```php
-$result = $client->fusion()->create([
+$result = $client->Fusion()->create([
   "materia1" => /* `$STRING` */,
   "materia1_mastered" => /* `$BOOLEAN` */,
   "materia2" => /* `$STRING` */,
@@ -154,7 +154,7 @@ Return the entity name.
 ## MateriaEntity
 
 ```php
-$materia = $client->materia();
+$materia = $client->Materia();
 ```
 
 ### Fields
@@ -175,7 +175,7 @@ $materia = $client->materia();
 List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-$results = $client->materia()->list([]);
+$results = $client->Materia()->list([]);
 ```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
@@ -183,7 +183,7 @@ $results = $client->materia()->list([]);
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->materia()->load(["id" => "materia_id"]);
+$result = $client->Materia()->load(["id" => "materia_id"]);
 ```
 
 ### Common Methods
@@ -219,7 +219,7 @@ Return the entity name.
 ## SystemEntity
 
 ```php
-$system = $client->system();
+$system = $client->System();
 ```
 
 ### Fields
@@ -235,7 +235,7 @@ $system = $client->system();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->system()->load(["id" => "system_id"]);
+$result = $client->System()->load(["id" => "system_id"]);
 ```
 
 ### Common Methods

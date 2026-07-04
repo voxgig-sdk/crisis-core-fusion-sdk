@@ -133,7 +133,7 @@ Alias for `CrisisCoreFusionSDK.test()`.
 ## FusionEntity
 
 ```ts
-const fusion = client.fusion
+const fusion = client.Fusion()
 ```
 
 ### Fields
@@ -153,7 +153,7 @@ const fusion = client.fusion
 Create a new entity with the given data.
 
 ```ts
-const result = await client.fusion.create({
+const result = await client.Fusion().create({
   materia1: /* `$STRING` */,
   materia1_mastered: /* `$BOOLEAN` */,
   materia2: /* `$STRING` */,
@@ -192,7 +192,7 @@ Return a copy of the entity options.
 ## MateriaEntity
 
 ```ts
-const materia = client.materia
+const materia = client.Materia()
 ```
 
 ### Fields
@@ -213,7 +213,7 @@ const materia = client.materia
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.materia.list()
+const results = await client.Materia().list()
 ```
 
 #### `load(match: object, ctrl?: object)`
@@ -221,7 +221,7 @@ const results = await client.materia.list()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.materia.load({ id: 'materia_id' })
+const result = await client.Materia().load({ id: 'materia_id' })
 ```
 
 ### Common Methods
@@ -255,7 +255,7 @@ Return a copy of the entity options.
 ## SystemEntity
 
 ```ts
-const system = client.system
+const system = client.System()
 ```
 
 ### Fields
@@ -271,7 +271,7 @@ const system = client.system
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.system.load({ id: 'system_id' })
+const result = await client.System().load({ id: 'system_id' })
 ```
 
 ### Common Methods

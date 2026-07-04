@@ -94,7 +94,7 @@ same parameters as `direct()`. Raises on error.
 ## FusionEntity
 
 ```ruby
-fusion = client.fusion
+fusion = client.Fusion
 ```
 
 ### Fields
@@ -114,7 +114,7 @@ fusion = client.fusion
 Create a new entity with the given data. Raises on error.
 
 ```ruby
-result = client.fusion.create({
+result = client.Fusion.create({
   "materia1" => # `$STRING`,
   "materia1_mastered" => # `$BOOLEAN`,
   "materia2" => # `$STRING`,
@@ -155,7 +155,7 @@ Return the entity name.
 ## MateriaEntity
 
 ```ruby
-materia = client.materia
+materia = client.Materia
 ```
 
 ### Fields
@@ -176,7 +176,7 @@ materia = client.materia
 List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results = client.materia.list(nil)
+results = client.Materia.list(nil)
 ```
 
 #### `load(reqmatch, ctrl = nil) -> result`
@@ -184,7 +184,7 @@ results = client.materia.list(nil)
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.materia.load({ "id" => "materia_id" })
+result = client.Materia.load({ "id" => "materia_id" })
 ```
 
 ### Common Methods
@@ -220,7 +220,7 @@ Return the entity name.
 ## SystemEntity
 
 ```ruby
-system = client.system
+system = client.System
 ```
 
 ### Fields
@@ -236,7 +236,7 @@ system = client.system
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.system.load({ "id" => "system_id" })
+result = client.System.load({ "id" => "system_id" })
 ```
 
 ### Common Methods

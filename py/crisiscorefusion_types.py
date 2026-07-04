@@ -4,62 +4,65 @@
 # params (op.<name>.points[].args.params[]). Field/param types come from the
 # canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 # @voxgig/apidef VALID_CANON). Do not edit by hand.
+#
+# These are TypedDicts, not dataclasses: the SDK ops return/accept plain dicts
+# at runtime, and a TypedDict IS a dict shape, so the types match the runtime.
+# Optional (req:false) keys are modelled as TypedDict key-optionality
+# (total=False), split into a required base + total=False subclass when a type
+# has both required and optional keys.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
-from typing import Optional, Any
+from typing import TypedDict, Any
 
 
-@dataclass
-class Fusion:
+class FusionRequired(TypedDict):
     materia1: str
     materia1_mastered: bool
     materia2: str
     materia2_mastered: bool
-    result: Optional[dict] = None
 
 
-@dataclass
-class FusionCreateData:
-    materia1: Optional[str] = None
-    materia1_mastered: Optional[bool] = None
-    materia2: Optional[str] = None
-    materia2_mastered: Optional[bool] = None
-    result: Optional[dict] = None
+class Fusion(FusionRequired, total=False):
+    result: dict
 
 
-@dataclass
-class Materia:
+class FusionCreateData(TypedDict, total=False):
+    materia1: str
+    materia1_mastered: bool
+    materia2: str
+    materia2_mastered: bool
+    result: dict
+
+
+class MateriaRequired(TypedDict):
     id: int
     name: str
     type: str
-    description: Optional[str] = None
-    max_level: Optional[int] = None
-    rarity: Optional[str] = None
 
 
-@dataclass
-class MateriaLoadMatch:
+class Materia(MateriaRequired, total=False):
+    description: str
+    max_level: int
+    rarity: str
+
+
+class MateriaLoadMatch(TypedDict):
     id: str
 
 
-@dataclass
-class MateriaListMatch:
-    description: Optional[str] = None
-    id: Optional[int] = None
-    max_level: Optional[int] = None
-    name: Optional[str] = None
-    rarity: Optional[str] = None
-    type: Optional[str] = None
+class MateriaListMatch(TypedDict, total=False):
+    description: str
+    id: int
+    max_level: int
+    name: str
+    rarity: str
+    type: str
 
 
-@dataclass
-class System:
-    status: Optional[str] = None
+class System(TypedDict, total=False):
+    status: str
 
 
-@dataclass
-class SystemLoadMatch:
-    status: Optional[str] = None
-
+class SystemLoadMatch(TypedDict, total=False):
+    status: str

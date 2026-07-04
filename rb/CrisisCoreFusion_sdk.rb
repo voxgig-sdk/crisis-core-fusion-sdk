@@ -208,39 +208,21 @@ class CrisisCoreFusionSDK
   end
 
 
-  # Idiomatic facade: client.fusion.list / client.fusion.load({ "id" => ... })
-  def fusion
-    require_relative 'entity/fusion_entity'
-    @fusion ||= FusionEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.fusion instead.
+  # Canonical facade: client.Fusion.list / client.Fusion.load({ "id" => ... })
   def Fusion(data = nil)
     require_relative 'entity/fusion_entity'
     FusionEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.materia.list / client.materia.load({ "id" => ... })
-  def materia
-    require_relative 'entity/materia_entity'
-    @materia ||= MateriaEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.materia instead.
+  # Canonical facade: client.Materia.list / client.Materia.load({ "id" => ... })
   def Materia(data = nil)
     require_relative 'entity/materia_entity'
     MateriaEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.system.list / client.system.load({ "id" => ... })
-  def system
-    require_relative 'entity/system_entity'
-    @system ||= SystemEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.system instead.
+  # Canonical facade: client.System.list / client.System.load({ "id" => ... })
   def System(data = nil)
     require_relative 'entity/system_entity'
     SystemEntity.new(self, data)

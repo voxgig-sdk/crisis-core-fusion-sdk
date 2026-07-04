@@ -88,7 +88,7 @@ Prepare a fetch definition without sending. Returns the `fetchdef` and raises on
 ## FusionEntity
 
 ```python
-fusion = client.fusion
+fusion = client.Fusion()
 ```
 
 ### Fields
@@ -108,11 +108,11 @@ fusion = client.fusion
 Create a new entity with the given data. Returns the created entity data and raises on error.
 
 ```python
-result = client.fusion.create({
-    "materia1": # `$STRING`,
-    "materia1_mastered": # `$BOOLEAN`,
-    "materia2": # `$STRING`,
-    "materia2_mastered": # `$BOOLEAN`,
+result = client.Fusion().create({
+    "materia1": ...,  # `$STRING`
+    "materia1_mastered": ...,  # `$BOOLEAN`
+    "materia2": ...,  # `$STRING`
+    "materia2_mastered": ...,  # `$BOOLEAN`
 })
 ```
 
@@ -148,7 +148,7 @@ Return the entity name.
 ## MateriaEntity
 
 ```python
-materia = client.materia
+materia = client.Materia()
 ```
 
 ### Fields
@@ -169,7 +169,9 @@ materia = client.materia
 List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results = client.materia.list({})
+results = client.Materia().list({})
+for materia in results:
+    print(materia)
 ```
 
 #### `load(reqmatch, ctrl=None) -> dict`
@@ -177,7 +179,7 @@ results = client.materia.list({})
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.materia.load({"id": "materia_id"})
+result = client.Materia().load({"id": "materia_id"})
 ```
 
 ### Common Methods
@@ -212,7 +214,7 @@ Return the entity name.
 ## SystemEntity
 
 ```python
-system = client.system
+system = client.System()
 ```
 
 ### Fields
@@ -228,7 +230,7 @@ system = client.system
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.system.load({"id": "system_id"})
+result = client.System().load({"id": "system_id"})
 ```
 
 ### Common Methods

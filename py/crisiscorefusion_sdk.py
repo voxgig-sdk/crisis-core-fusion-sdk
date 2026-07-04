@@ -220,57 +220,27 @@ class CrisisCoreFusionSDK:
         }
 
 
-    @property
-    def fusion(self):
-        """Idiomatic facade: client.fusion.list() / client.fusion.load({"id": ...})."""
-        from entity.fusion_entity import FusionEntity
-        cached = getattr(self, "_fusion", None)
-        if cached is None:
-            cached = FusionEntity(self, None)
-            self._fusion = cached
-        return cached
-
-    def Fusion(self, data=None):
-        # Deprecated: use client.fusion instead.
+    def Fusion(self, data=None) -> "FusionEntity":
+        """Entity factory: client.Fusion().list({}) / client.Fusion().load({"id": ...})."""
         from entity.fusion_entity import FusionEntity
         return FusionEntity(self, data)
 
 
-    @property
-    def materia(self):
-        """Idiomatic facade: client.materia.list() / client.materia.load({"id": ...})."""
-        from entity.materia_entity import MateriaEntity
-        cached = getattr(self, "_materia", None)
-        if cached is None:
-            cached = MateriaEntity(self, None)
-            self._materia = cached
-        return cached
-
-    def Materia(self, data=None):
-        # Deprecated: use client.materia instead.
+    def Materia(self, data=None) -> "MateriaEntity":
+        """Entity factory: client.Materia().list({}) / client.Materia().load({"id": ...})."""
         from entity.materia_entity import MateriaEntity
         return MateriaEntity(self, data)
 
 
-    @property
-    def system(self):
-        """Idiomatic facade: client.system.list() / client.system.load({"id": ...})."""
-        from entity.system_entity import SystemEntity
-        cached = getattr(self, "_system", None)
-        if cached is None:
-            cached = SystemEntity(self, None)
-            self._system = cached
-        return cached
-
-    def System(self, data=None):
-        # Deprecated: use client.system instead.
+    def System(self, data=None) -> "SystemEntity":
+        """Entity factory: client.System().list({}) / client.System().load({"id": ...})."""
         from entity.system_entity import SystemEntity
         return SystemEntity(self, data)
 
 
 
     @classmethod
-    def test(cls, testopts=None, sdkopts=None):
+    def test(cls, testopts=None, sdkopts=None) -> "CrisisCoreFusionSDK":
         if sdkopts is None:
             sdkopts = {}
         sdkopts = vs.clone(sdkopts)
@@ -290,3 +260,11 @@ class CrisisCoreFusionSDK:
         sdk.mode = "test"
 
         return sdk
+
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from entity.fusion_entity import FusionEntity
+    from entity.materia_entity import MateriaEntity
+    from entity.system_entity import SystemEntity

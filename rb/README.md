@@ -31,8 +31,8 @@ client = CrisisCoreFusionSDK.new
 ### 4. Create, update, and remove
 
 ```ruby
-# Create
-created = client.fusion.create({ "name" => "Example" })
+# create returns the bare created Fusion record.
+created = client.Fusion.create({ "name" => "Example" })
 
 ```
 
@@ -77,13 +77,17 @@ end
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```ruby
-client = CrisisCoreFusionSDK.test
+client = CrisisCoreFusionSDK.test({
+  "entity" => { "fusion" => { "test01" => { "id" => "test01" } } },
+})
 
-result = client.fusion.load({ "id" => "test01" })
-# result contains mock response data
+# load returns the bare mock record (raises on error).
+fusion = client.Fusion.load({ "id" => "test01" })
+puts fusion
 ```
 
 ### Use a custom fetch function
@@ -246,7 +250,7 @@ API path: `/health`
 
 ### Fusion
 
-Create an instance: `const fusion = client.fusion`
+Create an instance: `fusion = client.Fusion`
 
 #### Operations
 
@@ -266,19 +270,19 @@ Create an instance: `const fusion = client.fusion`
 
 #### Example: Create
 
-```ts
-const fusion = await client.fusion.create({
-  materia1: /* `$STRING` */,
-  materia1_mastered: /* `$BOOLEAN` */,
-  materia2: /* `$STRING` */,
-  materia2_mastered: /* `$BOOLEAN` */,
+```ruby
+fusion = client.Fusion.create({
+  "materia1" => nil, # `$STRING`
+  "materia1_mastered" => nil, # `$BOOLEAN`
+  "materia2" => nil, # `$STRING`
+  "materia2_mastered" => nil, # `$BOOLEAN`
 })
 ```
 
 
 ### Materia
 
-Create an instance: `const materia = client.materia`
+Create an instance: `materia = client.Materia`
 
 #### Operations
 
@@ -300,20 +304,22 @@ Create an instance: `const materia = client.materia`
 
 #### Example: Load
 
-```ts
-const materia = await client.materia.load({ id: 'materia_id' })
+```ruby
+# load returns the bare Materia record (raises on error).
+materia = client.Materia.load({ "id" => "materia_id" })
 ```
 
 #### Example: List
 
-```ts
-const materias = await client.materia.list()
+```ruby
+# list returns an Array of Materia records (raises on error).
+materias = client.Materia.list
 ```
 
 
 ### System
 
-Create an instance: `const system = client.system`
+Create an instance: `system = client.System`
 
 #### Operations
 
@@ -329,8 +335,9 @@ Create an instance: `const system = client.system`
 
 #### Example: Load
 
-```ts
-const system = await client.system.load({ id: 'system_id' })
+```ruby
+# load returns the bare System record (raises on error).
+system = client.System.load({ "id" => "system_id" })
 ```
 
 
@@ -405,7 +412,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-fusion = client.fusion
+fusion = client.Fusion
 fusion.load({ "id" => "example_id" })
 
 # fusion.data_get now returns the loaded fusion data

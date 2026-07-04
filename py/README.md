@@ -34,8 +34,8 @@ client = CrisisCoreFusionSDK()
 ### 4. Create, update, and remove
 
 ```python
-# Create
-created = client.fusion.create({"name": "Example"})
+# Create — returns the bare created record (a dict)
+created = client.Fusion().create({"name": "Example"})
 
 ```
 
@@ -82,8 +82,9 @@ Create a mock client for unit testing — no server required:
 ```python
 client = CrisisCoreFusionSDK.test()
 
-result = client.fusion.load({"id": "test01"})
-# result contains mock response data
+# Entity ops return the bare record and raise on error.
+fusion = client.Fusion().load({"id": "test01"})
+# fusion contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -247,7 +248,7 @@ API path: `/health`
 
 ### Fusion
 
-Create an instance: `const fusion = client.fusion`
+Create an instance: `fusion = client.Fusion()`
 
 #### Operations
 
@@ -267,19 +268,19 @@ Create an instance: `const fusion = client.fusion`
 
 #### Example: Create
 
-```ts
-const fusion = await client.fusion.create({
-  materia1: /* `$STRING` */,
-  materia1_mastered: /* `$BOOLEAN` */,
-  materia2: /* `$STRING` */,
-  materia2_mastered: /* `$BOOLEAN` */,
+```python
+fusion = client.Fusion().create({
+    "materia1": ...,  # `$STRING`
+    "materia1_mastered": ...,  # `$BOOLEAN`
+    "materia2": ...,  # `$STRING`
+    "materia2_mastered": ...,  # `$BOOLEAN`
 })
 ```
 
 
 ### Materia
 
-Create an instance: `const materia = client.materia`
+Create an instance: `materia = client.Materia()`
 
 #### Operations
 
@@ -301,20 +302,20 @@ Create an instance: `const materia = client.materia`
 
 #### Example: Load
 
-```ts
-const materia = await client.materia.load({ id: 'materia_id' })
+```python
+materia = client.Materia().load({"id": "materia_id"})
 ```
 
 #### Example: List
 
-```ts
-const materias = await client.materia.list()
+```python
+materias = client.Materia().list({})
 ```
 
 
 ### System
 
-Create an instance: `const system = client.system`
+Create an instance: `system = client.System()`
 
 #### Operations
 
@@ -330,8 +331,8 @@ Create an instance: `const system = client.system`
 
 #### Example: Load
 
-```ts
-const system = await client.system.load({ id: 'system_id' })
+```python
+system = client.System().load({"id": "system_id"})
 ```
 
 
@@ -405,7 +406,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-fusion = client.fusion
+fusion = client.Fusion()
 fusion.load({"id": "example_id"})
 
 # fusion.data_get() now returns the loaded fusion data

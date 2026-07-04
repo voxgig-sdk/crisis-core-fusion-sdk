@@ -35,7 +35,8 @@ local client = sdk.new()
 
 ```lua
 -- Create
-local created, _ = client:fusion():create({ name = "Example" })
+local created, err = client:Fusion():create({ name = "Example" })
+if err then error(err) end
 
 ```
 
@@ -82,8 +83,8 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:fusion():load({ id = "test01" })
--- result contains mock response data
+local result, err = client:Fusion():load({ id = "test01" })
+-- result is the loaded data; err is set on failure
 ```
 
 ### Use a custom fetch function
@@ -185,17 +186,22 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return `(any, err)`. The first value is a
-`table` with these keys:
+Entity operations return `(value, err)`. The `value` is the operation's
+data **directly** — there is no wrapper:
 
-| Key | Type | Description |
-| --- | --- | --- |
-| `ok` | `boolean` | `true` if the HTTP status is 2xx. |
-| `status` | `number` | HTTP status code. |
-| `headers` | `table` | Response headers. |
-| `data` | `any` | Parsed JSON response body. |
+| Operation | `value` |
+| --- | --- |
+| `load` / `create` / `update` / `remove` | the entity record (a `table`) |
+| `list` | an array (`table`) of entity records |
 
-On error, `ok` is `false` and `err` contains the error value.
+Check `err` first (it is non-`nil` on failure), then use `value`:
+
+    local fusion, err = client:Fusion():load({ id = "example_id" })
+    if err then error(err) end
+    -- fusion is the loaded record
+
+Only `direct()` returns a response envelope — a `table` with `ok`,
+`status`, `headers`, and `data` keys.
 
 ### Entities
 
@@ -245,7 +251,7 @@ API path: `/health`
 
 ### Fusion
 
-Create an instance: `const fusion = client.fusion`
+Create an instance: `local fusion = client:Fusion(nil)`
 
 #### Operations
 
@@ -265,19 +271,19 @@ Create an instance: `const fusion = client.fusion`
 
 #### Example: Create
 
-```ts
-const fusion = await client.fusion.create({
-  materia1: /* `$STRING` */,
-  materia1_mastered: /* `$BOOLEAN` */,
-  materia2: /* `$STRING` */,
-  materia2_mastered: /* `$BOOLEAN` */,
+```lua
+local fusion, err = client:Fusion():create({
+  materia1 = nil, -- `$STRING`
+  materia1_mastered = nil, -- `$BOOLEAN`
+  materia2 = nil, -- `$STRING`
+  materia2_mastered = nil, -- `$BOOLEAN`
 })
 ```
 
 
 ### Materia
 
-Create an instance: `const materia = client.materia`
+Create an instance: `local materia = client:Materia(nil)`
 
 #### Operations
 
@@ -299,20 +305,20 @@ Create an instance: `const materia = client.materia`
 
 #### Example: Load
 
-```ts
-const materia = await client.materia.load({ id: 'materia_id' })
+```lua
+local materia, err = client:Materia():load({ id = "materia_id" })
 ```
 
 #### Example: List
 
-```ts
-const materias = await client.materia.list()
+```lua
+local materias, err = client:Materia():list()
 ```
 
 
 ### System
 
-Create an instance: `const system = client.system`
+Create an instance: `local system = client:System(nil)`
 
 #### Operations
 
@@ -328,8 +334,8 @@ Create an instance: `const system = client.system`
 
 #### Example: Load
 
-```ts
-const system = await client.system.load({ id: 'system_id' })
+```lua
+local system, err = client:System():load({ id = "system_id" })
 ```
 
 
@@ -404,7 +410,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local fusion = client:fusion()
+local fusion = client:Fusion()
 fusion:load({ id = "example_id" })
 
 -- fusion:data_get() now returns the loaded fusion data
