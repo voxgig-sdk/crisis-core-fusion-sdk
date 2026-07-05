@@ -13,7 +13,13 @@ export interface Fusion {
   result?: Record<string, any>
 }
 
-export type FusionCreateData = Partial<Fusion>
+export interface FusionCreateData {
+  materia1: string
+  materia1_mastered: boolean
+  materia2: string
+  materia2_mastered: boolean
+  result?: Record<string, any>
+}
 
 export interface Materia {
   description?: string
@@ -28,11 +34,20 @@ export interface MateriaLoadMatch {
   id: string
 }
 
-export type MateriaListMatch = Partial<Materia>
+export interface MateriaListMatch {
+  description?: string
+  id?: number
+  max_level?: number
+  name?: string
+  rarity?: string
+  type?: string
+}
 
 export interface System {
   status?: string
 }
 
-export type SystemLoadMatch = Partial<System>
+export interface SystemLoadMatch {
+  status?: string
+}
 

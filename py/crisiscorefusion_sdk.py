@@ -221,19 +221,19 @@ class CrisisCoreFusionSDK:
 
 
     def Fusion(self, data=None) -> "FusionEntity":
-        """Entity factory: client.Fusion().list({}) / client.Fusion().load({"id": ...})."""
+        """Entity factory: client.Fusion().list() / client.Fusion().load({"id": ...})."""
         from entity.fusion_entity import FusionEntity
         return FusionEntity(self, data)
 
 
     def Materia(self, data=None) -> "MateriaEntity":
-        """Entity factory: client.Materia().list({}) / client.Materia().load({"id": ...})."""
+        """Entity factory: client.Materia().list() / client.Materia().load({"id": ...})."""
         from entity.materia_entity import MateriaEntity
         return MateriaEntity(self, data)
 
 
     def System(self, data=None) -> "SystemEntity":
-        """Entity factory: client.System().list({}) / client.System().load({"id": ...})."""
+        """Entity factory: client.System().list() / client.System().load({"id": ...})."""
         from entity.system_entity import SystemEntity
         return SystemEntity(self, data)
 

@@ -105,11 +105,11 @@ fusion := client.Fusion(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `materia1` | ``$STRING`` | Yes |  |
-| `materia1_mastered` | ``$BOOLEAN`` | Yes |  |
-| `materia2` | ``$STRING`` | Yes |  |
-| `materia2_mastered` | ``$BOOLEAN`` | Yes |  |
-| `result` | ``$OBJECT`` | No |  |
+| `materia1` | `string` | Yes |  |
+| `materia1_mastered` | `bool` | Yes |  |
+| `materia2` | `string` | Yes |  |
+| `materia2_mastered` | `bool` | Yes |  |
+| `result` | `map[string]any` | No |  |
 
 ### Operations
 
@@ -119,10 +119,10 @@ Create a new entity with the given data.
 
 ```go
 result, err := client.Fusion(nil).Create(map[string]any{
-    "materia1": /* `$STRING` */,
-    "materia1_mastered": /* `$BOOLEAN` */,
-    "materia2": /* `$STRING` */,
-    "materia2_mastered": /* `$BOOLEAN` */,
+    "materia1": /* string */,
+    "materia1_mastered": /* bool */,
+    "materia2": /* string */,
+    "materia2_mastered": /* bool */,
 }, nil)
 ```
 
@@ -160,12 +160,12 @@ materia := client.Materia(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `description` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | Yes |  |
-| `max_level` | ``$INTEGER`` | No |  |
-| `name` | ``$STRING`` | Yes |  |
-| `rarity` | ``$STRING`` | No |  |
-| `type` | ``$STRING`` | Yes |  |
+| `description` | `string` | No |  |
+| `id` | `int` | Yes |  |
+| `max_level` | `int` | No |  |
+| `name` | `string` | Yes |  |
+| `rarity` | `string` | No |  |
+| `type` | `string` | Yes |  |
 
 ### Operations
 
@@ -219,7 +219,7 @@ system := client.System(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `status` | ``$STRING`` | No |  |
+| `status` | `string` | No |  |
 
 ### Operations
 
@@ -228,7 +228,7 @@ system := client.System(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.System(nil).Load(map[string]any{"id": "system_id"}, nil)
+result, err := client.System(nil).Load(nil, nil)
 ```
 
 ### Common Methods

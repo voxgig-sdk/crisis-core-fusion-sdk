@@ -98,11 +98,11 @@ local fusion = client:Fusion(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `materia1` | ``$STRING`` | Yes |  |
-| `materia1_mastered` | ``$BOOLEAN`` | Yes |  |
-| `materia2` | ``$STRING`` | Yes |  |
-| `materia2_mastered` | ``$BOOLEAN`` | Yes |  |
-| `result` | ``$OBJECT`` | No |  |
+| `materia1` | `string` | Yes |  |
+| `materia1_mastered` | `boolean` | Yes |  |
+| `materia2` | `string` | Yes |  |
+| `materia2_mastered` | `boolean` | Yes |  |
+| `result` | `table` | No |  |
 
 ### Operations
 
@@ -112,10 +112,10 @@ Create a new entity with the given data.
 
 ```lua
 local result, err = client:Fusion():create({
-  materia1 = --[[ `$STRING` ]],
-  materia1_mastered = --[[ `$BOOLEAN` ]],
-  materia2 = --[[ `$STRING` ]],
-  materia2_mastered = --[[ `$BOOLEAN` ]],
+  materia1 = --[[ string ]],
+  materia1_mastered = --[[ boolean ]],
+  materia2 = --[[ string ]],
+  materia2_mastered = --[[ boolean ]],
 })
 ```
 
@@ -159,12 +159,12 @@ local materia = client:Materia(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `description` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | Yes |  |
-| `max_level` | ``$INTEGER`` | No |  |
-| `name` | ``$STRING`` | Yes |  |
-| `rarity` | ``$STRING`` | No |  |
-| `type` | ``$STRING`` | Yes |  |
+| `description` | `string` | No |  |
+| `id` | `number` | Yes |  |
+| `max_level` | `number` | No |  |
+| `name` | `string` | Yes |  |
+| `rarity` | `string` | No |  |
+| `type` | `string` | Yes |  |
 
 ### Operations
 
@@ -224,7 +224,7 @@ local system = client:System(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `status` | ``$STRING`` | No |  |
+| `status` | `string` | No |  |
 
 ### Operations
 
@@ -233,7 +233,7 @@ local system = client:System(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:System():load({ id = "system_id" })
+local result, err = client:System():load()
 ```
 
 ### Common Methods

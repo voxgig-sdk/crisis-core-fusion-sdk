@@ -14,6 +14,11 @@
 ---@field result? table
 
 ---@class FusionCreateData
+---@field materia1 string
+---@field materia1_mastered boolean
+---@field materia2 string
+---@field materia2_mastered boolean
+---@field result? table
 
 ---@class Materia
 ---@field description? string
@@ -27,11 +32,18 @@
 ---@field id string
 
 ---@class MateriaListMatch
+---@field description? string
+---@field id? number
+---@field max_level? number
+---@field name? string
+---@field rarity? string
+---@field type? string
 
 ---@class System
 ---@field status? string
 
 ---@class SystemLoadMatch
+---@field status? string
 
 local M = {}
 

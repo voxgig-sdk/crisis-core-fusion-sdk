@@ -17,13 +17,12 @@ type Fusion struct {
 	Result *map[string]any `json:"result,omitempty"`
 }
 
-// FusionCreateData mirrors the fusion fields as an all-optional match
-// filter (Go analog of Partial<Fusion>).
+// FusionCreateData is the typed request payload for Fusion.CreateTyped.
 type FusionCreateData struct {
-	Materia1 *string `json:"materia1,omitempty"`
-	Materia1Mastered *bool `json:"materia1_mastered,omitempty"`
-	Materia2 *string `json:"materia2,omitempty"`
-	Materia2Mastered *bool `json:"materia2_mastered,omitempty"`
+	Materia1 string `json:"materia1"`
+	Materia1Mastered bool `json:"materia1_mastered"`
+	Materia2 string `json:"materia2"`
+	Materia2Mastered bool `json:"materia2_mastered"`
 	Result *map[string]any `json:"result,omitempty"`
 }
 
@@ -42,8 +41,7 @@ type MateriaLoadMatch struct {
 	Id string `json:"id"`
 }
 
-// MateriaListMatch mirrors the materia fields as an all-optional match
-// filter (Go analog of Partial<Materia>).
+// MateriaListMatch is the typed request payload for Materia.ListTyped.
 type MateriaListMatch struct {
 	Description *string `json:"description,omitempty"`
 	Id *int `json:"id,omitempty"`
@@ -58,8 +56,7 @@ type System struct {
 	Status *string `json:"status,omitempty"`
 }
 
-// SystemLoadMatch mirrors the system fields as an all-optional match
-// filter (Go analog of Partial<System>).
+// SystemLoadMatch is the typed request payload for System.LoadTyped.
 type SystemLoadMatch struct {
 	Status *string `json:"status,omitempty"`
 }

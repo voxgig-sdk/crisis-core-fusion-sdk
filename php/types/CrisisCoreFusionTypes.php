@@ -22,13 +22,13 @@ class Fusion
     public ?array $result = null;
 }
 
-/** Match filter for Fusion#create (any subset of Fusion fields). */
+/** Request payload for Fusion#create. */
 class FusionCreateData
 {
-    public ?string $materia1 = null;
-    public ?bool $materia1_mastered = null;
-    public ?string $materia2 = null;
-    public ?bool $materia2_mastered = null;
+    public string $materia1;
+    public bool $materia1_mastered;
+    public string $materia2;
+    public bool $materia2_mastered;
     public ?array $result = null;
 }
 
@@ -49,7 +49,7 @@ class MateriaLoadMatch
     public string $id;
 }
 
-/** Match filter for Materia#list (any subset of Materia fields). */
+/** Request payload for Materia#list. */
 class MateriaListMatch
 {
     public ?string $description = null;
@@ -66,7 +66,7 @@ class System
     public ?string $status = null;
 }
 
-/** Match filter for System#load (any subset of System fields). */
+/** Request payload for System#load. */
 class SystemLoadMatch
 {
     public ?string $status = null;

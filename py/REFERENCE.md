@@ -8,7 +8,7 @@ Complete API reference for the CrisisCoreFusion Python SDK.
 ### Constructor
 
 ```python
-from crisis-core-fusion_sdk import CrisisCoreFusionSDK
+from crisiscorefusion_sdk import CrisisCoreFusionSDK
 
 client = CrisisCoreFusionSDK(options)
 ```
@@ -95,11 +95,11 @@ fusion = client.Fusion()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `materia1` | ``$STRING`` | Yes |  |
-| `materia1_mastered` | ``$BOOLEAN`` | Yes |  |
-| `materia2` | ``$STRING`` | Yes |  |
-| `materia2_mastered` | ``$BOOLEAN`` | Yes |  |
-| `result` | ``$OBJECT`` | No |  |
+| `materia1` | `str` | Yes |  |
+| `materia1_mastered` | `bool` | Yes |  |
+| `materia2` | `str` | Yes |  |
+| `materia2_mastered` | `bool` | Yes |  |
+| `result` | `dict` | No |  |
 
 ### Operations
 
@@ -109,10 +109,10 @@ Create a new entity with the given data. Returns the created entity data and rai
 
 ```python
 result = client.Fusion().create({
-    "materia1": ...,  # `$STRING`
-    "materia1_mastered": ...,  # `$BOOLEAN`
-    "materia2": ...,  # `$STRING`
-    "materia2_mastered": ...,  # `$BOOLEAN`
+    "materia1": "example",  # str
+    "materia1_mastered": True,  # bool
+    "materia2": "example",  # str
+    "materia2_mastered": True,  # bool
 })
 ```
 
@@ -155,21 +155,21 @@ materia = client.Materia()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `description` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | Yes |  |
-| `max_level` | ``$INTEGER`` | No |  |
-| `name` | ``$STRING`` | Yes |  |
-| `rarity` | ``$STRING`` | No |  |
-| `type` | ``$STRING`` | Yes |  |
+| `description` | `str` | No |  |
+| `id` | `int` | Yes |  |
+| `max_level` | `int` | No |  |
+| `name` | `str` | Yes |  |
+| `rarity` | `str` | No |  |
+| `type` | `str` | Yes |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Materia().list({})
+results = client.Materia().list()
 for materia in results:
     print(materia)
 ```
@@ -221,7 +221,7 @@ system = client.System()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `status` | ``$STRING`` | No |  |
+| `status` | `str` | No |  |
 
 ### Operations
 
@@ -230,7 +230,7 @@ system = client.System()
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.System().load({"id": "system_id"})
+result = client.System().load()
 ```
 
 ### Common Methods

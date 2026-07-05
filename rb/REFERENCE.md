@@ -8,7 +8,7 @@ Complete API reference for the CrisisCoreFusion Ruby SDK.
 ### Constructor
 
 ```ruby
-require_relative 'crisis-core-fusion_sdk'
+require_relative 'CrisisCoreFusion_sdk'
 
 client = CrisisCoreFusionSDK.new(options)
 ```
@@ -101,11 +101,11 @@ fusion = client.Fusion
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `materia1` | ``$STRING`` | Yes |  |
-| `materia1_mastered` | ``$BOOLEAN`` | Yes |  |
-| `materia2` | ``$STRING`` | Yes |  |
-| `materia2_mastered` | ``$BOOLEAN`` | Yes |  |
-| `result` | ``$OBJECT`` | No |  |
+| `materia1` | `String` | Yes |  |
+| `materia1_mastered` | `Boolean` | Yes |  |
+| `materia2` | `String` | Yes |  |
+| `materia2_mastered` | `Boolean` | Yes |  |
+| `result` | `Hash` | No |  |
 
 ### Operations
 
@@ -115,10 +115,10 @@ Create a new entity with the given data. Raises on error.
 
 ```ruby
 result = client.Fusion.create({
-  "materia1" => # `$STRING`,
-  "materia1_mastered" => # `$BOOLEAN`,
-  "materia2" => # `$STRING`,
-  "materia2_mastered" => # `$BOOLEAN`,
+  "materia1" => "example", # String
+  "materia1_mastered" => true, # Boolean
+  "materia2" => "example", # String
+  "materia2_mastered" => true, # Boolean
 })
 ```
 
@@ -162,21 +162,21 @@ materia = client.Materia
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `description` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | Yes |  |
-| `max_level` | ``$INTEGER`` | No |  |
-| `name` | ``$STRING`` | Yes |  |
-| `rarity` | ``$STRING`` | No |  |
-| `type` | ``$STRING`` | Yes |  |
+| `description` | `String` | No |  |
+| `id` | `Integer` | Yes |  |
+| `max_level` | `Integer` | No |  |
+| `name` | `String` | Yes |  |
+| `rarity` | `String` | No |  |
+| `type` | `String` | Yes |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.Materia.list(nil)
+results = client.Materia.list
 ```
 
 #### `load(reqmatch, ctrl = nil) -> result`
@@ -227,7 +227,7 @@ system = client.System
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `status` | ``$STRING`` | No |  |
+| `status` | `String` | No |  |
 
 ### Operations
 
@@ -236,7 +236,7 @@ system = client.System
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.System.load({ "id" => "system_id" })
+result = client.System.load()
 ```
 
 ### Common Methods

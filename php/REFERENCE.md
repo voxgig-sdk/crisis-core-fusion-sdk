@@ -8,7 +8,7 @@ Complete API reference for the CrisisCoreFusion PHP SDK.
 ### Constructor
 
 ```php
-require_once __DIR__ . '/crisis-core-fusion_sdk.php';
+require_once __DIR__ . '/crisiscorefusion_sdk.php';
 
 $client = new CrisisCoreFusionSDK($options);
 ```
@@ -53,11 +53,11 @@ Create a new `MateriaEntity` instance. Pass `null` for no initial data.
 
 Create a new `SystemEntity` instance. Pass `null` for no initial data.
 
-#### `optionsMap(): array`
+#### `options_map(): array`
 
 Return a deep copy of the current SDK options.
 
-#### `getUtility(): ProjectNameUtility`
+#### `get_utility(): CrisisCoreFusionUtility`
 
 Return a copy of the SDK utility object.
 
@@ -100,11 +100,11 @@ $fusion = $client->Fusion();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `materia1` | ``$STRING`` | Yes |  |
-| `materia1_mastered` | ``$BOOLEAN`` | Yes |  |
-| `materia2` | ``$STRING`` | Yes |  |
-| `materia2_mastered` | ``$BOOLEAN`` | Yes |  |
-| `result` | ``$OBJECT`` | No |  |
+| `materia1` | `string` | Yes |  |
+| `materia1_mastered` | `bool` | Yes |  |
+| `materia2` | `string` | Yes |  |
+| `materia2_mastered` | `bool` | Yes |  |
+| `result` | `array` | No |  |
 
 ### Operations
 
@@ -114,28 +114,28 @@ Create a new entity with the given data. Throws on error.
 
 ```php
 $result = $client->Fusion()->create([
-  "materia1" => /* `$STRING` */,
-  "materia1_mastered" => /* `$BOOLEAN` */,
-  "materia2" => /* `$STRING` */,
-  "materia2_mastered" => /* `$BOOLEAN` */,
+  "materia1" => null, // string
+  "materia1_mastered" => null, // bool
+  "materia2" => null, // string
+  "materia2_mastered" => null, // bool
 ]);
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -144,7 +144,7 @@ Set the entity match criteria.
 Create a new `FusionEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -161,21 +161,21 @@ $materia = $client->Materia();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `description` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | Yes |  |
-| `max_level` | ``$INTEGER`` | No |  |
-| `name` | ``$STRING`` | Yes |  |
-| `rarity` | ``$STRING`` | No |  |
-| `type` | ``$STRING`` | Yes |  |
+| `description` | `string` | No |  |
+| `id` | `int` | Yes |  |
+| `max_level` | `int` | No |  |
+| `name` | `string` | Yes |  |
+| `rarity` | `string` | No |  |
+| `type` | `string` | Yes |  |
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): mixed`
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
 
 ```php
-$results = $client->Materia()->list([]);
+$results = $client->Materia()->list();
 ```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
@@ -188,19 +188,19 @@ $result = $client->Materia()->load(["id" => "materia_id"]);
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -209,7 +209,7 @@ Set the entity match criteria.
 Create a new `MateriaEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -226,7 +226,7 @@ $system = $client->System();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `status` | ``$STRING`` | No |  |
+| `status` | `string` | No |  |
 
 ### Operations
 
@@ -235,24 +235,24 @@ $system = $client->System();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->System()->load(["id" => "system_id"]);
+$result = $client->System()->load();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -261,7 +261,7 @@ Set the entity match criteria.
 Create a new `SystemEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 

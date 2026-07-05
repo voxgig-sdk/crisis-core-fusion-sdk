@@ -27,11 +27,14 @@ class Fusion(FusionRequired, total=False):
     result: dict
 
 
-class FusionCreateData(TypedDict, total=False):
+class FusionCreateDataRequired(TypedDict):
     materia1: str
     materia1_mastered: bool
     materia2: str
     materia2_mastered: bool
+
+
+class FusionCreateData(FusionCreateDataRequired, total=False):
     result: dict
 
 

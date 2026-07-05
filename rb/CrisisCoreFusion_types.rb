@@ -33,19 +33,19 @@ Fusion = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Fusion#create (any subset of Fusion fields).
+# Request payload for Fusion#create.
 #
 # @!attribute [rw] materia1
-#   @return [String, nil]
+#   @return [String]
 #
 # @!attribute [rw] materia1_mastered
-#   @return [Boolean, nil]
+#   @return [Boolean]
 #
 # @!attribute [rw] materia2
-#   @return [String, nil]
+#   @return [String]
 #
 # @!attribute [rw] materia2_mastered
-#   @return [Boolean, nil]
+#   @return [Boolean]
 #
 # @!attribute [rw] result
 #   @return [Hash, nil]
@@ -96,7 +96,7 @@ MateriaLoadMatch = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Materia#list (any subset of Materia fields).
+# Request payload for Materia#list.
 #
 # @!attribute [rw] description
 #   @return [String, nil]
@@ -134,7 +134,7 @@ System = Struct.new(
   keyword_init: true
 )
 
-# Match filter for System#load (any subset of System fields).
+# Request payload for System#load.
 #
 # @!attribute [rw] status
 #   @return [String, nil]
