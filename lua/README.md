@@ -37,7 +37,7 @@ local client = sdk.new()
 
 ```lua
 -- Create
-local created, err = client:Fusion():create({ materia1 = "example", materia1_mastered = true, materia2 = "example", materia2_mastered = true })
+local created, err = client:Fusion():create({ materia1 = "example_materia1", materia1_mastered = true, materia2 = "example_materia2", materia2_mastered = true })
 if err then error(err) end
 
 ```
@@ -49,7 +49,7 @@ Entity operations return `(value, err)`. Check `err` before using
 the value:
 
 ```lua
-local fusion, err = client:Fusion():create({ materia1 = "example", materia1_mastered = true, materia2 = "example", materia2_mastered = true })
+local materias, err = client:Materia():list()
 if err then error(err) end
 ```
 
@@ -107,7 +107,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:Fusion():create({ materia1 = "example", materia1_mastered = true, materia2 = "example", materia2_mastered = true })
+local result, err = client:Materia():list()
 -- result is the returned data; err is set on failure
 ```
 
@@ -295,10 +295,10 @@ Create an instance: `local fusion = client:Fusion(nil)`
 
 ```lua
 local fusion, err = client:Fusion():create({
-  materia1 = nil, -- string
-  materia1_mastered = nil, -- boolean
-  materia2 = nil, -- string
-  materia2_mastered = nil, -- boolean
+  materia1 = "example_materia1", -- string
+  materia1_mastered = true, -- boolean
+  materia2 = "example_materia2", -- string
+  materia2_mastered = true, -- boolean
 })
 ```
 
@@ -433,15 +433,15 @@ when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `create`, the entity
+Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local fusion = client:Fusion()
-fusion:create({ materia1 = "example", materia1_mastered = true, materia2 = "example", materia2_mastered = true })
+local materia = client:Materia()
+materia:list()
 
--- fusion:data_get() now returns the fusion data from the last create
--- fusion:match_get() returns the last match criteria
+-- materia:data_get() now returns the materia data from the last list
+-- materia:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

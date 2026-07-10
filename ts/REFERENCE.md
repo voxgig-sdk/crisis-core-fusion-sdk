@@ -154,10 +154,10 @@ Create a new entity with the given data.
 
 ```ts
 const result = await client.Fusion().create({
-  materia1: /* string */,
-  materia1_mastered: /* boolean */,
-  materia2: /* string */,
-  materia2_mastered: /* boolean */,
+  materia1: 'example_materia1',
+  materia1_mastered: true,
+  materia2: 'example_materia2',
+  materia2_mastered: true,
 })
 ```
 

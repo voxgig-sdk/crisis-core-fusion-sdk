@@ -40,7 +40,7 @@ client = CrisisCoreFusionSDK()
 
 ```python
 # Create — returns the bare created record (a dict)
-created = client.Fusion().create({"materia1": "example", "materia1_mastered": True, "materia2": "example", "materia2_mastered": True})
+created = client.Fusion().create({"materia1": "example_materia1", "materia1_mastered": True, "materia2": "example_materia2", "materia2_mastered": True})
 
 ```
 
@@ -51,10 +51,10 @@ Entity operations raise on failure, so wrap them in `try` / `except`:
 
 ```python
 try:
-    fusion = client.Fusion().create({ "materia1": "example", "materia1_mastered": True, "materia2": "example", "materia2_mastered": True })
-    print(fusion)
+    materias = client.Materia().list()
+    print(materias)
 except Exception as err:
-    print(f"create failed: {err}")
+    print(f"list failed: {err}")
 ```
 
 `direct()` does **not** raise — it returns the result envelope. Branch
@@ -119,8 +119,8 @@ Create a mock client for unit testing — no server required:
 client = CrisisCoreFusionSDK.test()
 
 # Entity ops return the bare record and raise on error.
-fusion = client.Fusion().create({"materia1": "example", "materia1_mastered": True, "materia2": "example", "materia2_mastered": True})
-# fusion contains the mock response record
+materia = client.Materia().list()
+# materia contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -304,9 +304,9 @@ Create an instance: `fusion = client.Fusion()`
 
 ```python
 fusion = client.Fusion().create({
-    "materia1": "example",  # str
+    "materia1": "example_materia1",  # str
     "materia1_mastered": True,  # bool
-    "materia2": "example",  # str
+    "materia2": "example_materia2",  # str
     "materia2_mastered": True,  # bool
 })
 ```
@@ -441,15 +441,15 @@ Import entity or utility modules directly only when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `create`, the entity
+Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-fusion = client.Fusion()
-fusion.create({ "materia1": "example", "materia1_mastered": True, "materia2": "example", "materia2_mastered": True })
+materia = client.Materia()
+materia.list()
 
-# fusion.data_get() now returns the fusion data from the last create
-# fusion.match_get() returns the last match criteria
+# materia.data_get() now returns the materia data from the last list
+# materia.match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

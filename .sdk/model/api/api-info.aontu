@@ -20,9 +20,9 @@ main: {
           url: "https://crisis-core-materia-fusion-api-546461677134.us-central1.run.app"
         }
       ]
+      summary: "This API simulates the fusion of materia from the game 'Crisis Core: Final Fantasy VII'."
       title: "Crisis Core Fusion API"
       version: "1.0.0"
+      website: "https://crisis-core-materia-fusion-api-546461677134.us-central1.run.app"
     }
   }
-}
-

@@ -109,9 +109,9 @@ Create a new entity with the given data. Returns the created entity data and rai
 
 ```python
 result = client.Fusion().create({
-    "materia1": "example",  # str
+    "materia1": "example_materia1",  # str
     "materia1_mastered": True,  # bool
-    "materia2": "example",  # str
+    "materia2": "example_materia2",  # str
     "materia2_mastered": True,  # bool
 })
 ```

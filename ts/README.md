@@ -53,10 +53,10 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 
 ```ts
 try {
-  const fusion = await client.Fusion().create({ materia1: "example", materia1_mastered: true, materia2: "example", materia2_mastered: true })
-  console.log(fusion)
+  const materias = await client.Materia().list()
+  console.log(materias)
 } catch (err) {
-  console.error('create failed:', err)
+  console.error('list failed:', err)
 }
 ```
 
@@ -120,9 +120,9 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = CrisisCoreFusionSDK.test()
 
-const fusion = await client.Fusion().create({ materia1: 'example_materia1', materia1_mastered: true, materia2: 'example_materia2', materia2_mastered: true })
-// fusion is a bare entity populated with mock response data
-console.log(fusion)
+const materia = await client.Materia().list()
+// materia is a bare entity populated with mock response data
+console.log(materia)
 ```
 
 You can also use the instance method:
@@ -137,14 +137,14 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.Fusion()
+const entity = client.Materia()
 
 // First call runs the operation and stores its result
-await entity.create({ materia1: 'example_materia1', materia1_mastered: true, materia2: 'example_materia2', materia2_mastered: true })
+await entity.list()
 
 // Subsequent calls reuse the stored state
 const data = entity.data()
-console.log(data)
+console.log(data.id)
 ```
 
 ### Add custom middleware
@@ -354,10 +354,10 @@ Create an instance: `const fusion = client.Fusion()`
 
 ```ts
 const fusion = await client.Fusion().create({
-  materia1: /* string */,
-  materia1_mastered: /* boolean */,
-  materia2: /* string */,
-  materia2_mastered: /* boolean */,
+  materia1: 'example_materia1',
+  materia1_mastered: true,
+  materia2: 'example_materia2',
+  materia2_mastered: true,
 })
 ```
 
@@ -484,16 +484,16 @@ import { CrisisCoreFusionSDK } from '@voxgig-sdk/crisis-core-fusion'
 
 ### Entity state
 
-Entity instances are stateful. After a successful `create`, the entity
+Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const fusion = client.Fusion()
-await fusion.create({ materia1: "example", materia1_mastered: true, materia2: "example", materia2_mastered: true })
+const materia = client.Materia()
+await materia.list()
 
-// fusion.data() now returns the fusion data from the last `create`
-// fusion.match() returns the last match criteria
+// materia.data() now returns the materia data from the last `list`
+// materia.match() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

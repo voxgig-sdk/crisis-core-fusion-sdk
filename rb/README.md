@@ -34,7 +34,7 @@ client = CrisisCoreFusionSDK.new
 
 ```ruby
 # create returns the bare created Fusion record.
-created = client.Fusion.create({ "materia1" => "example", "materia1_mastered" => true, "materia2" => "example", "materia2_mastered" => true })
+created = client.Fusion.create({ "materia1" => "example_materia1", "materia1_mastered" => true, "materia2" => "example_materia2", "materia2_mastered" => true })
 
 ```
 
@@ -45,9 +45,9 @@ Entity operations raise on failure, so rescue them:
 
 ```ruby
 begin
-  fusion = client.Fusion.create({ "materia1" => "example", "materia1_mastered" => true, "materia2" => "example", "materia2_mastered" => true })
+  materias = client.Materia.list()
 rescue => err
-  warn "create failed: #{err}"
+  warn "list failed: #{err}"
 end
 ```
 
@@ -108,14 +108,17 @@ end
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```ruby
-client = CrisisCoreFusionSDK.test
+client = CrisisCoreFusionSDK.test({
+  "entity" => { "materia" => { "test01" => { "id" => "test01" } } },
+})
 
 # Entity ops return the bare mock record (raises on error).
-fusion = client.Fusion.create({ "materia1" => "example", "materia1_mastered" => true, "materia2" => "example", "materia2_mastered" => true })
-puts fusion
+materia = client.Materia.list()
+puts materia
 ```
 
 ### Use a custom fetch function
@@ -298,9 +301,9 @@ Create an instance: `fusion = client.Fusion`
 
 ```ruby
 fusion = client.Fusion.create({
-  "materia1" => "example", # String
+  "materia1" => "example_materia1", # String
   "materia1_mastered" => true, # Boolean
-  "materia2" => "example", # String
+  "materia2" => "example_materia2", # String
   "materia2_mastered" => true, # Boolean
 })
 ```
@@ -439,15 +442,15 @@ when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `create`, the entity
+Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-fusion = client.Fusion
-fusion.create({ "materia1" => "example", "materia1_mastered" => true, "materia2" => "example", "materia2_mastered" => true })
+materia = client.Materia
+materia.list()
 
-# fusion.data_get now returns the fusion data from the last create
-# fusion.match_get returns the last match criteria
+# materia.data_get now returns the materia data from the last list
+# materia.match_get returns the last match criteria
 ```
 
 Call `make` to create a fresh instance with the same configuration

@@ -35,7 +35,7 @@ $client = new CrisisCoreFusionSDK();
 
 ```php
 // create() returns the bare created Fusion record.
-$created = $client->Fusion()->create(["materia1" => "example", "materia1_mastered" => true, "materia2" => "example", "materia2_mastered" => true]);
+$created = $client->Fusion()->create(["materia1" => "example_materia1", "materia1_mastered" => true, "materia2" => "example_materia2", "materia2_mastered" => true]);
 
 ```
 
@@ -47,7 +47,7 @@ Entity operations throw a `\Throwable` on failure, so wrap them in
 
 ```php
 try {
-    $fusion = $client->Fusion()->create(["materia1" => "example", "materia1_mastered" => true, "materia2" => "example", "materia2_mastered" => true]);
+    $materias = $client->Materia()->list();
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
@@ -114,14 +114,17 @@ print_r($fetchdef["headers"]);
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```php
-$client = CrisisCoreFusionSDK::test();
+$client = CrisisCoreFusionSDK::test([
+    "entity" => ["materia" => ["test01" => ["id" => "test01"]]],
+]);
 
 // Entity ops return the bare mock record (throws on error).
-$fusion = $client->Fusion()->create(["materia1" => "example", "materia1_mastered" => true, "materia2" => "example", "materia2_mastered" => true]);
-print_r($fusion);
+$materia = $client->Materia()->list();
+print_r($materia);
 ```
 
 ### Use a custom fetch function
@@ -449,15 +452,15 @@ when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `create`, the entity
+Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$fusion = $client->Fusion();
-$fusion->create(["materia1" => "example", "materia1_mastered" => true, "materia2" => "example", "materia2_mastered" => true]);
+$materia = $client->Materia();
+$materia->list();
 
-// $fusion->data_get() now returns the fusion data from the last create
-// $fusion->match_get() returns the last match criteria
+// $materia->data_get() now returns the materia data from the last list
+// $materia->match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

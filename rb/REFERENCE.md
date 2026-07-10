@@ -115,9 +115,9 @@ Create a new entity with the given data. Raises on error.
 
 ```ruby
 result = client.Fusion.create({
-  "materia1" => "example", # String
+  "materia1" => "example_materia1", # String
   "materia1_mastered" => true, # Boolean
-  "materia2" => "example", # String
+  "materia2" => "example_materia2", # String
   "materia2_mastered" => true, # Boolean
 })
 ```

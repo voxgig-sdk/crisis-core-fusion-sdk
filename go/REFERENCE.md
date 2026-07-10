@@ -99,6 +99,7 @@ same parameters as `Direct()`.
 
 ```go
 fusion := client.Fusion(nil)
+fmt.Println(fusion.GetName()) // "fusion"
 ```
 
 ### Fields
@@ -119,11 +120,15 @@ Create a new entity with the given data.
 
 ```go
 result, err := client.Fusion(nil).Create(map[string]any{
-    "materia1": /* string */,
-    "materia1_mastered": /* bool */,
-    "materia2": /* string */,
-    "materia2_mastered": /* bool */,
+    "materia1": "example_materia1",
+    "materia1_mastered": true,
+    "materia2": "example_materia2",
+    "materia2_mastered": true,
 }, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -154,6 +159,7 @@ Return the entity name.
 
 ```go
 materia := client.Materia(nil)
+fmt.Println(materia.GetName()) // "materia"
 ```
 
 ### Fields
@@ -175,6 +181,10 @@ List entities matching the given criteria. Returns an array.
 
 ```go
 results, err := client.Materia(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(results)
 ```
 
 #### `Load(reqmatch, ctrl map[string]any) (any, error)`
@@ -183,6 +193,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.Materia(nil).Load(map[string]any{"id": "materia_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -213,6 +227,7 @@ Return the entity name.
 
 ```go
 system := client.System(nil)
+fmt.Println(system.GetName()) // "system"
 ```
 
 ### Fields
@@ -229,6 +244,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.System(nil).Load(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods

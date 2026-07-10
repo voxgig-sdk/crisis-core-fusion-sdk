@@ -51,7 +51,7 @@ func main() {
     client := sdk.New()
 
     // Create a fusion.
-    created, err := client.Fusion(nil).Create(map[string]any{"materia1": "example", "materia1_mastered": true, "materia2": "example", "materia2_mastered": true}, nil)
+    created, err := client.Fusion(nil).Create(map[string]any{"materia1": "example_materia1", "materia1_mastered": true, "materia2": "example_materia2", "materia2_mastered": true}, nil)
     if err != nil {
         panic(err)
     }
@@ -66,12 +66,12 @@ Every entity operation returns `(value, error)`. Check `err` before
 using the value — there is no exception to catch:
 
 ```go
-fusion, err := client.Fusion(nil).Create(map[string]any{"materia1": "example", "materia1_mastered": true, "materia2": "example", "materia2_mastered": true}, nil)
+materias, err := client.Materia(nil).List(nil, nil)
 if err != nil {
     // handle err
     return
 }
-_ = fusion
+_ = materias
 ```
 
 `Direct` follows the same `(value, error)` convention:
@@ -135,13 +135,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-fusion, err := client.Fusion(nil).Create(
-    map[string]any{"materia1": "example", "materia1_mastered": true, "materia2": "example", "materia2_mastered": true}, nil,
+materia, err := client.Materia(nil).List(
+    nil, nil,
 )
 if err != nil {
     panic(err)
 }
-fmt.Println(fusion) // the returned mock data
+fmt.Println(materia) // the returned mock data
 ```
 
 ### Use a custom fetch function
@@ -327,11 +327,15 @@ Create an instance: `fusion := client.Fusion(nil)`
 
 ```go
 result, err := client.Fusion(nil).Create(map[string]any{
-    "materia1": /* string */,
-    "materia1_mastered": /* bool */,
-    "materia2": /* string */,
-    "materia2_mastered": /* bool */,
+    "materia1": "example_materia1",
+    "materia1_mastered": true,
+    "materia2": "example_materia2",
+    "materia2_mastered": true,
 }, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 
@@ -474,15 +478,15 @@ like `core.ToMapAny`.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `Create`, the entity
+Entity instances are stateful. After a successful `List`, the entity
 stores the returned data and match criteria internally.
 
 ```go
-fusion := client.Fusion(nil)
-fusion.Create(map[string]any{"materia1": "example", "materia1_mastered": true, "materia2": "example", "materia2_mastered": true}, nil)
+materia := client.Materia(nil)
+materia.List(nil, nil)
 
-// fusion.Data() now returns the fusion data from the last create
-// fusion.Match() returns the last match criteria
+// materia.Data() now returns the materia data from the last list
+// materia.Match() returns the last match criteria
 ```
 
 Call `Make()` to create a fresh instance with the same configuration
