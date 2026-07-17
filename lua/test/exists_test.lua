@@ -1,4 +1,4 @@
--- ProjectName SDK exists test
+-- CrisisCoreFusion SDK exists test
 
 local sdk = require("crisis-core-fusion_sdk")
 
